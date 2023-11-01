@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      owner:
+        one: Proprietário
+        other: Proprietários
+    attributes:
+      owner:
+        name: Nome

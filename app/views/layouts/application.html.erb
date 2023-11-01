@@ -14,6 +14,17 @@
       <%= link_to root_path do %>
         <h1>Pousadaria</h1>
       <% end %>
+
+      <nav>
+        <ul>
+          <% if owner_signed_in? %>
+            <li><%= current_owner.description %></li>
+            <li><%= button_to 'Sair', destroy_owner_session_path, method: :delete %></li>
+          <% else %>
+            <li>Registre-se como: <%= link_to 'Hóspede', root_path %> | <%= link_to 'Proprietário', new_owner_registration_path %></li>
+          <% end %>
+        </ul>
+      </nav>
     </header>
 
     <%= alert %>
