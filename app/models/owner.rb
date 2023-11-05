@@ -1,11 +1,10 @@
 class Owner < ApplicationRecord
-  validates :name, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  :recoverable, :rememberable, :validatable
 
-  def description
-    "#{name} | #{email}"
-  end
+  has_one :guesthouse
+  
+  validates :name, presence: true
 end

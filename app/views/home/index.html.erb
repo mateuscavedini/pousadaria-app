@@ -1,0 +1,14 @@
+<% if @guesthouses.any? %>
+  <dl>
+    <% @guesthouses.each do |guesthouse| %>
+      <dt>Nome:</dt>
+      <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
+      <dt>Endereço:</dt>
+      <dd><%= address_description(guesthouse.address) %></dd>
+      <dt>Contato:</dt>
+      <dd><%= contact_description(guesthouse.contact) %></dd>
+    <% end %>
+  </dl>
+<% else %>
+  <p>Não existem pousadas cadastradas.</p>
+<% end %>

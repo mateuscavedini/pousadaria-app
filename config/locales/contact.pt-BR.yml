@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      contact: Contato
+    attributes:
+      contact:
+        phone: Telefone
+        email: E-mail
+        guesthouse_id: Pousada

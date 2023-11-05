@@ -1,0 +1,30 @@
+<%= f.fields_for :address do |af| %>
+  <div>
+    <%= af.label :postal_code %>
+    <%= af.text_field :postal_code %>
+  </div>
+  <div>
+    <%= af.label :street_name %>
+    <%= af.text_field :street_name %>
+  </div>
+  <div>
+    <%= af.label :street_number %>
+    <%= af.text_field :street_number %>
+  </div>
+  <div>
+    <%= af.label :complement %>
+    <%= af.text_field :complement %>
+  </div>
+  <div>
+    <%= af.label :district %>
+    <%= af.text_field :district %>
+  </div>
+  <div>
+    <%= af.label :city %>
+    <%= af.text_field :city %>
+  </div>
+  <div>
+    <%= af.label :state %>
+    <%= af.text_field :state %>
+  </div>
+<% end %>

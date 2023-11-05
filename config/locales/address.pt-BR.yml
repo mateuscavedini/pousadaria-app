@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      address:
+        one: Endereço
+        other: Endereços
+    attributes:
+      address:
+        street_name: Nome da Rua
+        street_number: Número
+        complement: Complemento
+        district: Bairro
+        city: Cidade
+        state: Estado
+        postal_code: CEP
+        guesthouse_id: Pousada

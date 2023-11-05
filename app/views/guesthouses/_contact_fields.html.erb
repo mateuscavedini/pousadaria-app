@@ -1,0 +1,10 @@
+<%= f.fields_for :contact do |cf| %>
+  <div>
+    <%= cf.label :phone %>
+    <%= cf.telephone_field :phone %>
+  </div>
+  <div>
+    <%= cf.label :email %>
+    <%= cf.email_field :email %>
+  </div>
+<% end %>

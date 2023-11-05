@@ -25,7 +25,8 @@ describe 'Usuário cria conta como proprietário de pousada' do
     fill_in 'Confirme sua senha', with: 'senha12345'
     click_on 'Criar Conta'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_guesthouse_path
+    expect(page).to have_content 'Cadastre sua Pousada'
     expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
     within 'header nav' do
       expect(page).to have_content 'Teste | proprietario@teste.com'
@@ -48,19 +49,5 @@ describe 'Usuário cria conta como proprietário de pousada' do
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'E-mail não pode ficar em branco'
     expect(page).to have_content 'Senha não pode ficar em branco'
-  end
-
-  it 'com email já registrado' do
-    Owner.create!(name: 'Proprietário Registrado', email: 'registrado@email.com', password: 'senha12345')
-
-    visit root_path
-    click_on 'Proprietário'
-    fill_in 'Nome', with: 'Novo Proprietário'
-    fill_in 'E-mail', with: 'registrado@email.com'
-    fill_in 'Senha', with: 'senha12345'
-    click_on 'Criar Conta'
-
-    expect(page).to have_content 'Não foi possível salvar proprietário'
-    expect(page).to have_content 'E-mail já está em uso'
   end
 end

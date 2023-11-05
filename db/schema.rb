@@ -10,7 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_01_155314) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_05_062123) do
+  create_table "addresses", force: :cascade do |t|
+    t.string "street_name"
+    t.string "street_number"
+    t.string "complement"
+    t.string "district"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.integer "guesthouse_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guesthouse_id"], name: "index_addresses_on_guesthouse_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "phone"
+    t.string "email"
+    t.integer "guesthouse_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guesthouse_id"], name: "index_contacts_on_guesthouse_id"
+  end
+
+  create_table "guesthouses", force: :cascade do |t|
+    t.string "corporate_name"
+    t.string "trading_name"
+    t.string "registration_number"
+    t.text "description"
+    t.boolean "allow_pets"
+    t.text "usage_policy"
+    t.time "check_in"
+    t.time "check_out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "payment_methods"
+    t.integer "owner_id", null: false
+    t.integer "status", default: 0
+    t.index ["owner_id"], name: "index_guesthouses_on_owner_id"
+  end
+
   create_table "owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -24,4 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_155314) do
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "guesthouses"
+  add_foreign_key "contacts", "guesthouses"
+  add_foreign_key "guesthouses", "owners"
 end

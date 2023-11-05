@@ -1,0 +1,34 @@
+<h2><%= @guesthouse.trading_name %></h2>
+
+<dl>
+  <dt>Razão Social:</dt>
+  <dd><%= @guesthouse.corporate_name %></dd>
+  <dt>CNPJ:</dt>
+  <dd><%= @guesthouse.registration_number %></dd>
+  <dt>Descrição:</dt>
+  <dd><%= @guesthouse.description %></dd>
+  <dt>Métodos de Pagamento:</dt>
+  <dd><%= @guesthouse.payment_methods %></dd>
+  <dt>Permite Pets:</dt>
+  <dd><%= guesthouse_allow_pets_string(@guesthouse) %></dd>
+  <dt>Políticas de Uso:</dt>
+  <dd><%= @guesthouse.usage_policy %></dd>
+  <dt>Horário de Check-In:</dt>
+  <dd><%= guesthouse_format_time(@guesthouse.check_in) %></dd>
+  <dt>Horário de Check-Out:</dt>
+  <dd><%= guesthouse_format_time(@guesthouse.check_out) %></dd>
+  <dt>Endereço:</dt>
+  <dd><%= address_description(@guesthouse.address) %></dd>
+  <dt>Contato:</dt>
+  <dd><%= contact_description(@guesthouse.contact) %></dd>
+</dl>
+
+
+<% if owner_signed_in? && current_owner == @guesthouse.owner %>
+  <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %>
+  <% if @guesthouse.active? %>
+    <%= button_to 'Desativar Pousada', deactivated_guesthouse_path(@guesthouse) %>
+  <% else %>
+    <%= button_to 'Ativar Pousada', activated_guesthouse_path(@guesthouse) %>
+  <% end %>
+<% end %>
