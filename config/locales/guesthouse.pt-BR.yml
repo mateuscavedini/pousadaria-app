@@ -1,4 +1,9 @@
 pt-BR:
+  guesthouse:
+    allow_pets:
+      true: Sim
+      false: Não
+
   activerecord:
     models:
       guesthouse:
@@ -10,7 +15,7 @@ pt-BR:
         trading_name: Nome Fantasia
         registration_number: CNPJ
         description: Descrição
-        allow_pets: Permite Pets
+        allow_pets: Permite Pets?
         usage_policy: Políticas de Uso
         check_in: Horário de Check-In
         check_out: Horário de Check-Out

@@ -16,8 +16,8 @@ describe 'Proprietário edita sua pousada' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
-    Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
-
+    guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
+    
     login_as owner
     visit root_path
     within 'header nav' do
@@ -28,13 +28,13 @@ describe 'Proprietário edita sua pousada' do
     fill_in 'Complemento', with: 'Bloco B'
     fill_in 'E-mail', with: 'contato@pousada.com'
     fill_in 'Descrição', with: 'Nova descrição'
-    check 'Permite Pets'
+    check 'Permite Pets?'
     click_on 'Enviar'
 
     expect(page).to have_content 'Endereço: Av do Novo Teste, 100, Bloco B, Jd. Testando, 11010-001, Jundiaí - SP'
     expect(page).to have_content 'Contato: contato@pousada.com | 11912344321'
     expect(page).to have_content 'Descrição: Nova descrição'
-    expect(page).to have_content 'Permite Pets: Esta pousada permite pets'
+    expect(page).to have_content 'Permite Pets? Sim'
   end
 
   it 'com dados insuficientes' do
