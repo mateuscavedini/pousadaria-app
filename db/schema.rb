@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_05_220157) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_05_221033) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
     t.string "street_number"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_05_220157) do
     t.integer "guesthouse_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["guesthouse_id"], name: "index_rooms_on_guesthouse_id"
   end
 
