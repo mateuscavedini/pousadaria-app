@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_owner!, only: [:new, :create, :edit, :update, :my_guesthouse, :activated, :deactivated]
+  before_action :authenticate_owner!, except: [:show]
   before_action :set_guesthouse, only: [:show, :edit, :update, :activated, :deactivated]
   before_action :check_owner, only: [:edit, :update, :activated, :deactivated]
   before_action :check_guesthouse_existence, only: [:new, :create]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_05_062123) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_05_220157) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
     t.string "street_number"
@@ -64,7 +64,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_05_062123) do
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "area"
+    t.integer "max_capacity"
+    t.integer "daily_rate"
+    t.boolean "has_bathroom"
+    t.boolean "has_balcony"
+    t.boolean "has_air_conditioner"
+    t.boolean "has_tv"
+    t.boolean "has_wardrobe"
+    t.boolean "has_safe"
+    t.boolean "is_accessible"
+    t.integer "guesthouse_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guesthouse_id"], name: "index_rooms_on_guesthouse_id"
+  end
+
   add_foreign_key "addresses", "guesthouses"
   add_foreign_key "contacts", "guesthouses"
   add_foreign_key "guesthouses", "owners"
+  add_foreign_key "rooms", "guesthouses"
 end

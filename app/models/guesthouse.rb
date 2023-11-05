@@ -2,6 +2,7 @@ class Guesthouse < ApplicationRecord
   belongs_to :owner
   has_one :contact
   has_one :address
+  has_many :rooms
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :contact
