@@ -1,6 +1,6 @@
 pt-BR:
   guesthouse:
-    allow_pets:
+    boolean:
       true: Sim
       false: Não
 
