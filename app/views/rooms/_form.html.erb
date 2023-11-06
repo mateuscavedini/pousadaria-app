@@ -1,0 +1,55 @@
+<%= render partial: 'errors', locals: { room: @room } %>
+
+<%= form_with model: [@guesthouse, @room] do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :area %>
+    <%= f.number_field :area %>
+  </div>
+  <div>
+    <%= f.label :max_capacity %>
+    <%= f.number_field :max_capacity %>
+  </div>
+  <div>
+    <%= f.label :daily_rate %>
+    <%= f.number_field :daily_rate %>
+  </div>
+  <div>
+    <%= f.label :has_bathroom %>
+    <%= f.check_box :has_bathroom %>
+  </div>
+  <div>
+    <%= f.label :has_balcony %>
+    <%= f.check_box :has_balcony %>
+  </div>
+  <div>
+    <%= f.label :has_air_conditioner %>
+    <%= f.check_box :has_air_conditioner %>
+  </div>
+  <div>
+    <%= f.label :has_tv %>
+    <%= f.check_box :has_tv %>
+  </div>
+  <div>
+    <%= f.label :has_wardrobe %>
+    <%= f.check_box :has_wardrobe %>
+  </div>
+  <div>
+    <%= f.label :has_safe %>
+    <%= f.check_box :has_safe %>
+  </div>
+  <div>
+    <%= f.label :is_accessible %>
+    <%= f.check_box :is_accessible %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

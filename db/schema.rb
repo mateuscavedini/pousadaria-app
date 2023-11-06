@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_05_221033) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_06_055207) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
     t.string "street_number"
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_05_221033) do
     t.string "description"
     t.integer "area"
     t.integer "max_capacity"
-    t.integer "daily_rate"
+    t.decimal "daily_rate", precision: 8, scale: 2
     t.boolean "has_bathroom"
     t.boolean "has_balcony"
     t.boolean "has_air_conditioner"

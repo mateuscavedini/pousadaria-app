@@ -19,7 +19,7 @@
   <dt>Métodos de Pagamento:</dt>
   <dd><%= @guesthouse.payment_methods %></dd>
   <dt>Permite Pets?</dt>
-  <dd><%= t("guesthouse.boolean.#{@guesthouse.allow_pets?}") %></dd>
+  <dd><%= t("yesno.#{@guesthouse.allow_pets?}") %></dd>
   <dt>Políticas de Uso:</dt>
   <dd><%= @guesthouse.usage_policy %></dd>
   <dt>Horário de Check-In:</dt>
@@ -32,6 +32,10 @@
   <dd><%= contact_description(@guesthouse.contact) %></dd>
 </dl>
 
+<% if owner_signed_in? && current_owner == @guesthouse.owner %>
+  <%= link_to 'Adicionar Quarto', new_guesthouse_room_path(@guesthouse) %>
+<% end %>
+
 <h3>Quartos Disponíveis:</h3>
 <% if @guesthouse.rooms.active.any? %>
   <dl>
@@ -43,7 +47,7 @@
       <dt>Área:</dt>
       <dd><%= room.area %>m²</dd>
       <dt>Diária:</dt>
-      <dd><%= number_to_currency(room.daily_rate_as_decimal) %></dd>
+      <dd><%= number_to_currency(room.daily_rate) %></dd>
     <% end %>
   </dl>
 <% else %>

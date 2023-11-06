@@ -11,11 +11,11 @@ pt-BR:
         area: Área
         max_capacity: Capacidade Máxima
         daily_rate: Diária
-        has_bathroom: Possui Banheiro
-        has_balcony: Possui Varanda
-        has_air_conditioner: Possui Ar Condicionado
-        has_tv: Possui TV
-        has_wardrobe: Possui Guarda-roupas
-        has_safe: Possui Cofre
-        is_accessible: É accesível para PCDs
+        has_bathroom: Possui Banheiro?
+        has_balcony: Possui Varanda?
+        has_air_conditioner: Possui Ar Condicionado?
+        has_tv: Possui TV?
+        has_wardrobe: Possui Guarda-roupas?
+        has_safe: Possui Cofre?
+        is_accessible: É acessível para PCDs?
         guesthouse_id: Pousada

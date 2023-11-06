@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :guesthouses, only: [:show, :new, :create, :edit, :update] do
     post 'activated', on: :member
     post 'deactivated', on: :member
+
+    resources :rooms, only: [:show, :new, :create]
   end
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
 end

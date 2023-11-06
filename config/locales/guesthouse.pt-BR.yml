@@ -1,9 +1,4 @@
 pt-BR:
-  guesthouse:
-    boolean:
-      true: Sim
-      false: Não
-
   activerecord:
     models:
       guesthouse:

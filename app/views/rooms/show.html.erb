@@ -1,0 +1,28 @@
+<h2><%= @room.guesthouse.trading_name %> - <%= @room.name %></h2>
+
+<dl>
+  <dt>Nome:</dt>
+  <dd><%= @room.name %></dd>
+  <dt>Descrição:</dt>
+  <dd><%= @room.description %></dd>
+  <dt>Área:</dt>
+  <dd><%= @room.area %>m²</dd>
+  <dt>Capacidade Máxima:</dt>
+  <dd><%= @room.max_capacity %> pessoa(s)</dd>
+  <dt>Diária:</dt>
+  <dd><%= number_to_currency(@room.daily_rate) %></dd>
+  <dt>Possui Banheiro?</dt>
+  <dd><%= t("yesno.#{@room.has_bathroom?}") %></dd>
+  <dt>Possui Varanda?</dt>
+  <dd><%= t("yesno.#{@room.has_balcony?}") %></dd>
+  <dt>Possui Ar Condicionado?</dt>
+  <dd><%= t("yesno.#{@room.has_air_conditioner?}") %></dd>
+  <dt>Possui TV?</dt>
+  <dd><%= t("yesno.#{@room.has_tv?}") %></dd>
+  <dt>Possui Guarda-roupas?</dt>
+  <dd><%= t("yesno.#{@room.has_wardrobe?}") %></dd>
+  <dt>Possui Cofre?</dt>
+  <dd><%= t("yesno.#{@room.has_safe?}") %></dd>
+  <dt>É acessível para PCDs?</dt>
+  <dd><%= t("yesno.#{@room.is_accessible?}") %></dd>
+</dl>
