@@ -37,19 +37,40 @@
 <% end %>
 
 <h3>Quartos Disponíveis:</h3>
-<% if @guesthouse.rooms.active.any? %>
-  <dl>
-    <% @guesthouse.rooms.active.each do |room| %>
-      <dt>Nome:</dt>
-      <dd><%= link_to room.name, guesthouse_room_path(room) %></dd>
-      <dt>Descrição:</dt>
-      <dd><%= room.description %></dd>
-      <dt>Área:</dt>
-      <dd><%= room.area %>m²</dd>
-      <dt>Diária:</dt>
-      <dd><%= number_to_currency(room.daily_rate) %></dd>
-    <% end %>
-  </dl>
+
+<% if owner_signed_in? && current_owner == @guesthouse.owner %>
+  <% if @guesthouse.rooms.any? %>
+    <dl>
+      <% @guesthouse.rooms.each do |room| %>
+        <dt>Nome:</dt>
+        <dd><%= link_to room.name, guesthouse_room_path(room) %></dd>
+        <dt>Descrição:</dt>
+        <dd><%= room.description %></dd>
+        <dt>Área:</dt>
+        <dd><%= room.area %>m²</dd>
+        <dt>Diária:</dt>
+        <dd><%= number_to_currency(room.daily_rate) %></dd>
+      <% end %>
+    </dl>
+  <% else %>
+    <p>Não existem quartos a serem exibidos.</p>
+  <% end %>
 <% else %>
-  <p>Não existem quartos a serem exibidos.</p>
+  <% if @guesthouse.rooms.active.any? %>
+    <dl>
+      <% @guesthouse.rooms.active.each do |room| %>
+        <dt>Nome:</dt>
+        <dd><%= link_to room.name, guesthouse_room_path(room) %></dd>
+        <dt>Descrição:</dt>
+        <dd><%= room.description %></dd>
+        <dt>Área:</dt>
+        <dd><%= room.area %>m²</dd>
+        <dt>Diária:</dt>
+        <dd><%= number_to_currency(room.daily_rate) %></dd>
+      <% end %>
+    </dl>
+  <% else %>
+    <p>Não existem quartos a serem exibidos.</p>
+  <% end %>
 <% end %>
+
