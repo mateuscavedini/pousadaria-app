@@ -5,7 +5,7 @@
   <% if @room.active? %>
     <%= button_to 'Desativar Quarto', deactivated_guesthouse_room_path(@room.guesthouse, @room) %>
   <% else %>
-    <%= button_to 'Ativar Quarto', activated_guesthouse_path(@room.guesthouse, @room) %>
+    <%= button_to 'Ativar Quarto', activated_guesthouse_room_path(@room.guesthouse, @room) %>
   <% end %>
 <% end %>
 

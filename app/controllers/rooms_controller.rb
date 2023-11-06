@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   before_action :authenticate_owner!, except: [:show]
-  before_action :set_guesthouse, only: [:new, :create, :edit, :update]
-  before_action :set_room, only: [:show, :edit, :update]
-  before_action :check_owner, only: [:new, :create, :edit, :update]
-  before_action :check_room_belongs_to_guesthouse, only: [:edit, :update]
+  before_action :set_guesthouse, only: [:new, :create, :edit, :update, :activated, :deactivated]
+  before_action :set_room, only: [:show, :edit, :update, :activated, :deactivated]
+  before_action :check_owner, only: [:new, :create, :edit, :update, :activated, :deactivated]
+  before_action :check_room_belongs_to_guesthouse, only: [:edit, :update, :activated, :deactivated]
   before_action :check_owner_and_room_status, only: [:show]
 
   def show; end
