@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_06_055207) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_07_023126) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
     t.string "street_number"
@@ -84,8 +84,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_055207) do
     t.index ["guesthouse_id"], name: "index_rooms_on_guesthouse_id"
   end
 
+  create_table "seasonal_rates", force: :cascade do |t|
+    t.date "start_date"
+    t.date "finish_date"
+    t.decimal "rate", precision: 8, scale: 2
+    t.integer "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_seasonal_rates_on_room_id"
+  end
+
   add_foreign_key "addresses", "guesthouses"
   add_foreign_key "contacts", "guesthouses"
   add_foreign_key "guesthouses", "owners"
   add_foreign_key "rooms", "guesthouses"
+  add_foreign_key "seasonal_rates", "rooms"
 end
