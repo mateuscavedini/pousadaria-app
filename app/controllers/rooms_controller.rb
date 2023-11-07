@@ -16,16 +16,14 @@ class RoomsController < ApplicationController
     @room = @guesthouse.rooms.build(room_params)
 
     if @room.save
-      redirect_to guesthouse_room_path(@guesthouse, @room), notice: 'Quarto cadastrado com sucesso.'
+      redirect_to room_path(@room), notice: 'Quarto cadastrado com sucesso.'
     else
       flash.now[:alert] = 'Não foi possível cadastrar o quarto.'
       render :new
     end
   end
 
-  def edit
-    @guesthouse = @room.guesthouse
-  end
+  def edit; end
 
   def update
     if @room.update(room_params)

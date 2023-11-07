@@ -1,6 +1,6 @@
 <%= render partial: 'errors', locals: { room: @room } %>
 
-<%= form_with model: @room do |f| %>
+<%= form_with model: [@guesthouse, @room] do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>
