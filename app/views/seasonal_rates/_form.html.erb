@@ -1,0 +1,19 @@
+<%= render 'errors' %>
+
+<%= form_with model: [@room, @seasonal_rate] do |f| %>
+  <div>
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+  <div>
+    <%= f.label :finish_date %>
+    <%= f.date_field :finish_date %>
+  </div>
+  <div>
+    <%= f.label :rate %>
+    <%= f.number_field :rate %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

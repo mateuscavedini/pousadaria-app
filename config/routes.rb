@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show, :edit, :update] do
     post 'activated', on: :member
     post 'deactivated', on: :member
+
+    resources :seasonal_rates, only: [:new, :create]
   end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'

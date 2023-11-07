@@ -25,5 +25,9 @@ RSpec.describe SeasonalRate, type: :model do
 
       expect(seasonal_rate.errors.include? :rate).to be true
     end
+
+    pending 'overlap'
+    pending 'datas passada'
+    pending 'data final antes de data inicial'
   end
 end

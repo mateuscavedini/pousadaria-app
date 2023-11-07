@@ -1,7 +1,7 @@
-<% if guesthouse.errors.any? %>
+<% if @guesthouse.errors.any? %>
   <h3>Erros:</h3>
   <ul>
-    <% guesthouse.errors.full_messages.each do |msg| %>
+    <% @guesthouse.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
   </ul>

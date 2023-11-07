@@ -38,6 +38,7 @@
 
 <% if owner_signed_in? && current_owner == @room.guesthouse.owner %>
   <h3>Preços Sazonais</h3>
+  <%= link_to 'Adicionar Preço Sazonal', new_room_seasonal_rate_path(@room) %>
   <% if @room.seasonal_rates.any? %>
     <ul>
       <% @room.seasonal_rates.each do |seasonal_rate| %>
