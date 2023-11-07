@@ -117,7 +117,7 @@ describe 'Proprietário vê detalhes de um quarto' do
     expect(page).not_to have_button 'Ativar Quarto'
   end
 
-  it 'inativo de sua pousada e vê link para ativar' do
+  it 'inativo de sua pousada e vê botão para ativar' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
