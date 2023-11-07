@@ -1,11 +1,11 @@
 <h2><%= @room.guesthouse.trading_name %> - <%= @room.name %></h2>
 
 <% if owner_signed_in? && @room.guesthouse.owner == current_owner %>
-  <%= link_to 'Editar', edit_guesthouse_room_path(@room.guesthouse, @room) %>
+  <%= link_to 'Editar', edit_room_path(@room.guesthouse, @room) %>
   <% if @room.active? %>
-    <%= button_to 'Desativar Quarto', deactivated_guesthouse_room_path(@room.guesthouse, @room) %>
+    <%= button_to 'Desativar Quarto', deactivated_room_path(@room.guesthouse, @room) %>
   <% else %>
-    <%= button_to 'Ativar Quarto', activated_guesthouse_room_path(@room.guesthouse, @room) %>
+    <%= button_to 'Ativar Quarto', activated_room_path(@room.guesthouse, @room) %>
   <% end %>
 <% end %>
 

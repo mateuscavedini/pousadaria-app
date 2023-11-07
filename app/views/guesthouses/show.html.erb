@@ -43,7 +43,7 @@
     <dl>
       <% @guesthouse.rooms.each do |room| %>
         <dt>Nome:</dt>
-        <dd><%= link_to room.name, guesthouse_room_path(room) %></dd>
+        <dd><%= link_to room.name, room_path(room) %></dd>
         <dt>Descrição:</dt>
         <dd><%= room.description %></dd>
         <dt>Área:</dt>
@@ -60,7 +60,7 @@
     <dl>
       <% @guesthouse.rooms.active.each do |room| %>
         <dt>Nome:</dt>
-        <dd><%= link_to room.name, guesthouse_room_path(room) %></dd>
+        <dd><%= link_to room.name, room_path(room) %></dd>
         <dt>Descrição:</dt>
         <dd><%= room.description %></dd>
         <dt>Área:</dt>
