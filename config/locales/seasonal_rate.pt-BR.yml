@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      seasonal_rate:
+        one: Preço Sazonal
+        other: Preços Sazonais
+    attributes:
+      seasonal_rate:
+        start_date: Data Inicial
+        finish_date: Data Final
+        rate: Diária
+        room_id: Quarto

@@ -35,3 +35,16 @@
   <dt>É acessível para PCDs?</dt>
   <dd><%= t("yesno.#{@room.is_accessible?}") %></dd>
 </dl>
+
+<% if owner_signed_in? && current_owner == @room.guesthouse.owner %>
+  <h3>Preços Sazonais</h3>
+  <% if @room.seasonal_rates.any? %>
+    <ul>
+      <% @room.seasonal_rates.each do |seasonal_rate| %>
+        <li><%= localize(seasonal_rate.start_date) %> até <%= localize(seasonal_rate.finish_date) %> - <%= number_to_currency(seasonal_rate.rate) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Não há preços sazonais cadastrados.</p>
+  <% end %>
+<% end %>
