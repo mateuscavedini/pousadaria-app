@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Proprietário cadastra quarto para pousada' do
+describe 'Proprietário cadastra quarto' do
   it 'e deve estar autenticado' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
@@ -13,7 +13,7 @@ describe 'Proprietário cadastra quarto para pousada' do
     expect(page).not_to have_link 'Adicionar Quarto'
   end
 
-  it 'de qual não é dono' do
+  it 'para pousada de qual não é dono' do
     maria = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     jose = Owner.create!(name: 'José', email: 'jose@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }

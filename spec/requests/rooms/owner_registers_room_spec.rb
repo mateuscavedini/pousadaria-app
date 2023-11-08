@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Proprietário cadastra quarto para pousada' do
-  it 'da qual não é dono' do
+describe 'Proprietário cadastra um quarto' do
+  it 'para uma pousada da qual não é dono' do
     maria = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     jose = Owner.create!(name: 'José', email: 'jose@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
