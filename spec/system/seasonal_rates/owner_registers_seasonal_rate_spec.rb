@@ -52,7 +52,14 @@ describe 'Proprietário registra novo preço sazonal' do
     click_on 'Enviar'
 
     expect(page).to have_content 'Preço Sazonal cadastrado com sucesso.'
-    expect(page).to have_content "#{I18n.localize(10.days.from_now.to_date)} até #{I18n.localize(20.days.from_now.to_date)} - R$ 84,99"
+    within 'table' do
+      expect(page).to have_content 'Data Inicial'
+      expect(page).to have_content I18n.localize(10.days.from_now.to_date)
+      expect(page).to have_content 'Data Final'
+      expect(page).to have_content I18n.localize(20.days.from_now.to_date)
+      expect(page).to have_content 'Diária'
+      expect(page).to have_content 'R$ 84,99'
+    end
   end
   
   it 'com dados insuficientes' do

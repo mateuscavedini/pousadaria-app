@@ -40,11 +40,26 @@
   <h3>Preços Sazonais</h3>
   <%= link_to 'Adicionar Preço Sazonal', new_room_seasonal_rate_path(@room) %>
   <% if @room.seasonal_rates.any? %>
-    <ul>
-      <% @room.seasonal_rates.each do |seasonal_rate| %>
-        <li><%= localize(seasonal_rate.start_date) %> até <%= localize(seasonal_rate.finish_date) %> - <%= number_to_currency(seasonal_rate.rate) %></li>
-      <% end %>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Data Inicial</th>
+          <th>Data Final</th>
+          <th>Diária</th>
+          <th colspan="2" >Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @room.seasonal_rates.each do |seasonal_rate| %>
+          <tr>
+            <td><%= localize(seasonal_rate.start_date) %></td>
+            <td><%= localize(seasonal_rate.finish_date) %></td>
+            <td><%= number_to_currency(seasonal_rate.rate) %></td>
+            <td><%= link_to 'Editar', edit_seasonal_rate_path(seasonal_rate) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
     <p>Não há preços sazonais cadastrados.</p>
   <% end %>

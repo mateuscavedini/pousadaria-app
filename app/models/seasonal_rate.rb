@@ -2,11 +2,11 @@ class SeasonalRate < ApplicationRecord
   belongs_to :room
 
   validates :start_date, :finish_date, :rate, presence: true
-  validate :dates_overlapping, :dates_are_future, :finish_date_is_later_than_start_date
+  validate :dates_are_not_overlapping, :dates_are_future, :finish_date_is_later_than_start_date
 
   private
 
-  def dates_overlapping
+  def dates_are_not_overlapping
     current_range = Range.new(self.start_date, self.finish_date)
 
     SeasonalRate.all.each do |rate|
@@ -20,13 +20,13 @@ class SeasonalRate < ApplicationRecord
   end
 
   def dates_are_future
-    self.errors.add(:start_date, 'Data Inicial deve ser futura') if self.start_date.present? && self.start_date <= Date.current
-    self.errors.add(:finish_date, 'Data Final deve ser futura') if self.finish_date.present? && self.finish_date <= Date.current
+    self.errors.add(:start_date, 'deve ser futura') if self.start_date.present? && self.start_date <= Date.current
+    self.errors.add(:finish_date, 'deve ser futura') if self.finish_date.present? && self.finish_date <= Date.current
   end
 
   def finish_date_is_later_than_start_date
     if self.start_date.present? && self.finish_date.present?
-      self.errors.add(:finish_date, 'Data Final deve ser posterior à Data Inicial') if self.start_date >= self.finish_date
+      self.errors.add(:finish_date, 'deve ser posterior à Data Inicial') if self.start_date >= self.finish_date
     end
   end
 end
