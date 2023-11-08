@@ -1,9 +1,8 @@
 class RoomsController < ApplicationController
   before_action :authenticate_owner!, except: [:show]
-  before_action :set_room, only: [:show, :edit, :update, :activated, :deactivated]
+  before_action :set_room, except: [:new, :create]
   before_action :set_guesthouse, only: [:new, :create]
-  before_action :check_room_owner, only: [:edit, :update, :activated, :deactivated]
-  before_action :check_guesthouse_owner, only: [:new, :create]
+  before_action :check_owner, except: [:show]
   before_action :check_room_status, only: [:show]
 
   def show; end
@@ -60,12 +59,14 @@ class RoomsController < ApplicationController
     @guesthouse = Guesthouse.find(params[:guesthouse_id])
   end
 
-  def check_guesthouse_owner
-    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless @guesthouse.owner == current_owner
-  end
+  def check_owner
+    if @guesthouse.present?
+      return if current_owner == @guesthouse.owner
+    else
+      return if current_owner == @room.guesthouse.owner
+    end
 
-  def check_room_owner
-    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless @room.guesthouse.owner == current_owner
+    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.'
   end
 
   def check_room_status

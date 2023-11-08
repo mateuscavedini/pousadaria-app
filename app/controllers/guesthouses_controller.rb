@@ -1,9 +1,9 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_owner!, except: [:show]
-  before_action :set_guesthouse, only: [:show, :edit, :update, :activated, :deactivated]
+  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse]
   before_action :check_owner, only: [:edit, :update, :activated, :deactivated]
   before_action :check_guesthouse_existence, only: [:new, :create]
-  before_action :check_owner_and_guesthouse_status, only: [:show]
+  before_action :check_guesthouse_status, only: [:show]
 
   def show; end
   
@@ -68,7 +68,7 @@ class GuesthousesController < ApplicationController
     redirect_to root_path, alert: 'Você já possui uma pousada cadastrada.' if current_owner.guesthouse
   end
 
-  def check_owner_and_guesthouse_status
+  def check_guesthouse_status
     unless current_owner == @guesthouse.owner
       redirect_to root_path, alert: 'Esta pousada está desativada.' if @guesthouse.inactive?
     end
