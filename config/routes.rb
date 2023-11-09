@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     resources :seasonal_rates, only: [:new, :create]
   end
 
-  resources :seasonal_rates, only: [:edit, :update]
+  resources :seasonal_rates, only: [:edit, :update] do
+    post 'activated', on: :member
+    post 'deactivated', on: :member
+  end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
 end

@@ -1,7 +1,7 @@
 class SeasonalRatesController < ApplicationController
   before_action :authenticate_owner!
   before_action :set_room, only: [:new, :create]
-  before_action :set_seasonal_rate, only: [:edit, :update]
+  before_action :set_seasonal_rate, only: [:edit, :update, :activated, :deactivated]
   before_action :check_owner
   
   def new
@@ -28,6 +28,18 @@ class SeasonalRatesController < ApplicationController
       flash.now[:alert] = 'Não foi possível atualizar o preço sazonal.'
       render :edit
     end
+  end
+
+  def activated
+    @seasonal_rate.active!
+
+    redirect_to @seasonal_rate.room, notice: 'O preço sazonal foi ativado com sucesso.'
+  end
+
+  def deactivated
+    @seasonal_rate.inactive!
+
+    redirect_to @seasonal_rate.room, notice: 'O preço sazonal foi desativado com sucesso.'
   end
 
   private

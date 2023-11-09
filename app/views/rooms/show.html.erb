@@ -56,6 +56,11 @@
             <td><%= localize(seasonal_rate.finish_date) %></td>
             <td><%= number_to_currency(seasonal_rate.rate) %></td>
             <td><%= link_to 'Editar', edit_seasonal_rate_path(seasonal_rate) %></td>
+            <% if seasonal_rate.active? %>
+              <td><%= button_to 'Desativar', deactivated_seasonal_rate_path(seasonal_rate) %></td>
+            <% else %>
+              <td><%= button_to 'Ativar', activated_seasonal_rate_path(seasonal_rate) %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

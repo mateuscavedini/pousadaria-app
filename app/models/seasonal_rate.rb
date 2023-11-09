@@ -1,6 +1,8 @@
 class SeasonalRate < ApplicationRecord
   belongs_to :room
 
+  enum status: { active: 0, inactive: 2 }
+
   validates :start_date, :finish_date, :rate, presence: true
   validate :dates_are_not_overlapping, :dates_are_future, :finish_date_is_later_than_start_date
 
@@ -9,12 +11,14 @@ class SeasonalRate < ApplicationRecord
   def dates_are_not_overlapping
     current_range = Range.new(self.start_date, self.finish_date)
 
-    SeasonalRate.all.each do |rate|
-      existing_range = Range.new(rate.start_date, rate.finish_date)
+    SeasonalRate.where(room_id: self.room_id).each do |rate|
+      unless self.id == rate.id
+        existing_range = Range.new(rate.start_date, rate.finish_date)
 
-      if current_range.overlaps? existing_range
-        self.errors.add(:base, 'Não deve haver sobreposição de datas entre Preços Sazonais')
-        break
+        if current_range.overlaps? existing_range
+          self.errors.add(:base, 'Não deve haver sobreposição de datas entre Preços Sazonais')
+          break
+        end
       end
     end
   end
