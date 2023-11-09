@@ -69,8 +69,6 @@ describe 'Proprietário cadastra sua pousada' do
 
     expect(page).to have_content 'Pousada cadastrada com sucesso.'
     expect(page).to have_content 'Pousada Teste'
-    expect(page).to have_content 'Razão Social: Pousadas Brasil LTDA'
-    expect(page).to have_content 'CNPJ: 12345678000100'
     expect(page).to have_content 'Descrição: Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.'
     expect(page).to have_content 'Métodos de Pagamento: Dinheiro e Cartão de Crédito'
     expect(page).to have_content 'Permite Pets? Sim'

@@ -1,14 +1,29 @@
-<% if @guesthouses.any? %>
-  <dl>
-    <% @guesthouses.each do |guesthouse| %>
-      <dt>Nome:</dt>
-      <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
-      <dt>Endereço:</dt>
-      <dd><%= address_description(guesthouse.address) %></dd>
-      <dt>Contato:</dt>
-      <dd><%= contact_description(guesthouse.contact) %></dd>
-    <% end %>
-  </dl>
+<% if @recent_guesthouses.any? %>
+  <div id="recent-guesthouses">
+    <h3>Pousadas Adicionadas Recentemente</h3>
+    <dl>
+      <% @recent_guesthouses.each do |guesthouse| %>
+        <dt>Nome:</dt>
+        <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
+        <dt>Cidade:</dt>
+        <dd><%= guesthouse.address.city %></dd>
+      <% end %>
+    </dl>
+  </div>
+  
+  <% if @guesthouses.any? %>
+    <div id="remaining-guesthouses">
+      <h3>Outras Pousadas</h3>
+      <dl>
+        <% @guesthouses.each do |guesthouse| %>
+          <dt>Nome:</dt>
+          <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
+          <dt>Cidade:</dt>
+          <dd><%= guesthouse.address.city %></dd>
+        <% end %>
+      </dl>
+    </div>
+  <% end %>
 <% else %>
   <p>Não existem pousadas cadastradas.</p>
 <% end %>
