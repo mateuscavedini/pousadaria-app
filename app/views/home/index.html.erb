@@ -1,3 +1,16 @@
+<% if @addresses.any? %>
+  <div id="city-links">
+    <h3>Cidades Disponíveis:</h3>
+    <nav>
+      <ul>
+        <% @addresses.each do |address| %>
+          <li><%= link_to address.city, search_by_city_guesthouses_path(query: address.city) %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+<% end %>
+
 <% if @recent_guesthouses.any? %>
   <div id="recent-guesthouses">
     <h3>Pousadas Adicionadas Recentemente</h3>

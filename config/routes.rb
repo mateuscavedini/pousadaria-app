@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :guesthouses, only: [:show, :new, :create, :edit, :update] do
     post 'activated', on: :member
     post 'deactivated', on: :member
+    get 'search_by_city', on: :collection
 
     resources :rooms, only: [:new, :create]
   end

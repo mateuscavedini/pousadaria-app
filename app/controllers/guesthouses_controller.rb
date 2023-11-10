@@ -1,6 +1,6 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_owner!, except: [:show]
-  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse]
+  before_action :authenticate_owner!, except: [:show, :search_by_city]
+  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse, :search_by_city]
   before_action :check_owner, only: [:edit, :update, :activated, :deactivated]
   before_action :check_guesthouse_existence, only: [:new, :create]
   before_action :check_guesthouse_status, only: [:show]
@@ -38,6 +38,12 @@ class GuesthousesController < ApplicationController
   def my_guesthouse
     @guesthouse = current_owner.guesthouse
     render :show
+  end
+
+  def search_by_city
+    @query = params[:query]
+    @guesthouses = Guesthouse.joins(:address).where(address: { city: @query }).order(trading_name: :asc)
+    render :search
   end
 
   def activated

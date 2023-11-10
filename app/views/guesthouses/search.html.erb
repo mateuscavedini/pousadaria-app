@@ -1,0 +1,8 @@
+<h2>Resultados da Busca por: <%= @query %></h2>
+<h3><%= @guesthouses.count %> pousadas encontradas</h3>
+
+<% if @guesthouses.any? %>
+  <% @guesthouses.each do |guesthouse| %>
+    <p><%= link_to guesthouse.trading_name, guesthouse %></p>
+  <% end %>
+<% end %>
