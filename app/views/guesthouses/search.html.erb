@@ -1,5 +1,5 @@
 <h2>Resultados da Busca por: <%= @query %></h2>
-<h3><%= @guesthouses.count %> pousadas encontradas</h3>
+<h3><%= @guesthouses.count %> <%= Guesthouse.model_name.human(count: @guesthouses.count).downcase %> <%= t(:found_fem, count: @guesthouses.count) %></h3>
 
 <% if @guesthouses.any? %>
   <% @guesthouses.each do |guesthouse| %>

@@ -1,6 +1,7 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_owner!, except: [:show, :search_by_city]
-  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse, :search_by_city]
+  before_action :authenticate_owner!, except: [:show, :search_by_city, :search_by_term]
+  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse, :search_by_city, :search_by_term]
+  before_action :set_query, only: [:search_by_city, :search_by_term]
   before_action :check_owner, only: [:edit, :update, :activated, :deactivated]
   before_action :check_guesthouse_existence, only: [:new, :create]
   before_action :check_guesthouse_status, only: [:show]
@@ -41,8 +42,13 @@ class GuesthousesController < ApplicationController
   end
 
   def search_by_city
-    @query = params[:query]
     @guesthouses = Guesthouse.joins(:address).where(address: { city: @query }).order(trading_name: :asc)
+    render :search
+  end
+
+  def search_by_term
+    term = "%#{@query}%"
+    @guesthouses = Guesthouse.active.joins(:address).where("trading_name LIKE :term OR addresses.city LIKE :term OR addresses.district LIKE :term", term: term).order(:trading_name)
     render :search
   end
 
@@ -60,6 +66,10 @@ class GuesthousesController < ApplicationController
 
   def set_guesthouse
     @guesthouse = Guesthouse.find(params[:id])
+  end
+
+  def set_query
+    @query = params[:query]
   end
 
   def guesthouse_params

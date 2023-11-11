@@ -10,7 +10,7 @@ describe 'Proprietário se autentica' do
     end
     fill_in 'E-mail', with: 'maria@email.com'
     fill_in 'Senha', with: 'senha123'
-    within 'form' do
+    within 'main form' do
       click_on 'Entrar'
     end
 

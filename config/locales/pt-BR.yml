@@ -2,3 +2,9 @@ pt-BR:
   yesno:
     true: Sim
     false: Não
+  found_fem:
+    one: encontrada
+    other: encontradas
+  found_masc:
+    one: encontrado
+    other: encontrados

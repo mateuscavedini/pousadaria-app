@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'activated', on: :member
     post 'deactivated', on: :member
     get 'search_by_city', on: :collection
+    get 'search_by_term', on: :collection
 
     resources :rooms, only: [:new, :create]
   end

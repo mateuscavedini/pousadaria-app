@@ -15,6 +15,12 @@
         <h1>Pousadaria</h1>
       <% end %>
 
+      <%= form_with url: search_by_term_guesthouses_path, method: :get do |f| %>
+        <%= f.label :query, 'Buscar Pousadas' %>
+        <%= f.text_field :query %>
+        <%= f.submit 'Buscar' %>
+      <% end %>
+
       <nav>
         <ul>
           <% if owner_signed_in? %>
