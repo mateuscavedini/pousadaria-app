@@ -1,7 +1,9 @@
 class SeasonalRatesController < ApplicationController
   before_action :authenticate_owner!
+
   before_action :set_room, only: [:new, :create]
-  before_action :set_seasonal_rate, only: [:edit, :update, :activated, :deactivated]
+  before_action :set_seasonal_rate, except: [:new, :create]
+  
   before_action :check_owner
   
   def new

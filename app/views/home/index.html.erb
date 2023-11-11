@@ -14,27 +14,17 @@
 <% if @recent_guesthouses.any? %>
   <div id="recent-guesthouses">
     <h3>Pousadas Adicionadas Recentemente</h3>
-    <dl>
-      <% @recent_guesthouses.each do |guesthouse| %>
-        <dt>Nome:</dt>
-        <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
-        <dt>Cidade:</dt>
-        <dd><%= guesthouse.address.city %></dd>
-      <% end %>
-    </dl>
+    <% @recent_guesthouses.each do |guesthouse| %>
+      <%= render guesthouse %>
+    <% end %>
   </div>
   
   <% if @guesthouses.any? %>
     <div id="remaining-guesthouses">
       <h3>Outras Pousadas</h3>
-      <dl>
-        <% @guesthouses.each do |guesthouse| %>
-          <dt>Nome:</dt>
-          <dd><%= link_to guesthouse.trading_name, guesthouse %></dd>
-          <dt>Cidade:</dt>
-          <dd><%= guesthouse.address.city %></dd>
-        <% end %>
-      </dl>
+      <% @guesthouses.each do |guesthouse| %>
+        <%= render guesthouse %>
+      <% end %>
     </div>
   <% end %>
 <% else %>

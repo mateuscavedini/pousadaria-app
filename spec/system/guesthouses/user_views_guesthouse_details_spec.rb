@@ -12,7 +12,7 @@ describe 'Usuário vê detalhes de uma pousada' do
 
     expect(page).to have_content 'Pousada Teste'
     expect(page).to have_content 'Descrição: Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.'
-    expect(page).to have_content 'Métodos de Pagamento: Dinheiro e Cartão de Crédito'
+    expect(page).to have_content 'Formas de Pagamento: Dinheiro e Cartão de Crédito'
     expect(page).to have_content 'Permite Pets? Não'
     expect(page).to have_content 'Políticas de Uso: Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.'
     expect(page).to have_content 'Horário de Check-In: 11:00'
@@ -84,7 +84,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
 
     expect(page).to have_content 'Pousada Teste'
     expect(page).to have_content 'Descrição: Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.'
-    expect(page).to have_content 'Métodos de Pagamento: Dinheiro e Cartão de Crédito'
+    expect(page).to have_content 'Formas de Pagamento: Dinheiro e Cartão de Crédito'
     expect(page).to have_content 'Permite Pets? Não'
     expect(page).to have_content 'Políticas de Uso: Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.'
     expect(page).to have_content 'Horário de Check-In: 11:00'

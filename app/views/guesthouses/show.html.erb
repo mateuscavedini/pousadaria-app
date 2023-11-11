@@ -10,21 +10,21 @@
 <% end %>
 
 <dl>
-  <dt>Descrição:</dt>
+  <dt><%= Guesthouse.human_attribute_name :description %>:</dt>
   <dd><%= @guesthouse.description %></dd>
-  <dt>Métodos de Pagamento:</dt>
+  <dt><%= Guesthouse.human_attribute_name :payment_methods %>:</dt>
   <dd><%= @guesthouse.payment_methods %></dd>
-  <dt>Permite Pets?</dt>
+  <dt><%= Guesthouse.human_attribute_name :allow_pets %></dt>
   <dd><%= t("yesno.#{@guesthouse.allow_pets?}") %></dd>
-  <dt>Políticas de Uso:</dt>
+  <dt><%= Guesthouse.human_attribute_name :usage_policy %>:</dt>
   <dd><%= @guesthouse.usage_policy %></dd>
-  <dt>Horário de Check-In:</dt>
+  <dt><%= Guesthouse.human_attribute_name :check_in %>:</dt>
   <dd><%= guesthouse_format_time(@guesthouse.check_in) %></dd>
-  <dt>Horário de Check-Out:</dt>
+  <dt><%= Guesthouse.human_attribute_name :check_out %>:</dt>
   <dd><%= guesthouse_format_time(@guesthouse.check_out) %></dd>
-  <dt>Endereço:</dt>
+  <dt><%= Address.model_name.human %>:</dt>
   <dd><%= address_description(@guesthouse.address) %></dd>
-  <dt>Contato:</dt>
+  <dt><%= Contact.model_name.human %>:</dt>
   <dd><%= contact_description(@guesthouse.contact) %></dd>
 </dl>
 
@@ -36,35 +36,17 @@
 
 <% if owner_signed_in? && current_owner == @guesthouse.owner %>
   <% if @guesthouse.rooms.any? %>
-    <dl>
-      <% @guesthouse.rooms.each do |room| %>
-        <dt>Nome:</dt>
-        <dd><%= link_to room.name, room_path(room) %></dd>
-        <dt>Descrição:</dt>
-        <dd><%= room.description %></dd>
-        <dt>Área:</dt>
-        <dd><%= room.area %>m²</dd>
-        <dt>Diária:</dt>
-        <dd><%= number_to_currency(room.daily_rate) %></dd>
-      <% end %>
-    </dl>
+    <% @guesthouse.rooms.each do |room| %>
+      <%= render room %>
+    <% end %>
   <% else %>
     <p>Não existem quartos a serem exibidos.</p>
   <% end %>
 <% else %>
   <% if @guesthouse.rooms.active.any? %>
-    <dl>
-      <% @guesthouse.rooms.active.each do |room| %>
-        <dt>Nome:</dt>
-        <dd><%= link_to room.name, room_path(room) %></dd>
-        <dt>Descrição:</dt>
-        <dd><%= room.description %></dd>
-        <dt>Área:</dt>
-        <dd><%= room.area %>m²</dd>
-        <dt>Diária:</dt>
-        <dd><%= number_to_currency(room.daily_rate) %></dd>
-      <% end %>
-    </dl>
+    <% @guesthouse.rooms.active.each do |room| %>
+      <%= render room %>
+    <% end %>
   <% else %>
     <p>Não existem quartos a serem exibidos.</p>
   <% end %>

@@ -1,0 +1,10 @@
+<dl>
+  <dt><%= Room.human_attribute_name :name %>:</dt>
+  <dd><%= link_to room.name, room_path(room) %></dd>
+  <dt><%= Room.human_attribute_name :description %>:</dt>
+  <dd><%= room.description %></dd>
+  <dt><%= Room.human_attribute_name :area %>:</dt>
+  <dd><%= room.area %>m²</dd>
+  <dt><%= Room.human_attribute_name :daily_rate %>:</dt>
+  <dd><%= number_to_currency(room.daily_rate) %></dd>
+</dl>

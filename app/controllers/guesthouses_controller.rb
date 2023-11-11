@@ -1,7 +1,9 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_owner!, except: [:show, :search_by_city, :search_by_term]
-  before_action :set_guesthouse, except: [:new, :create, :my_guesthouse, :search_by_city, :search_by_term]
+
+  before_action :set_guesthouse, only: [:show, :edit, :update, :activated, :deactivated]
   before_action :set_query, only: [:search_by_city, :search_by_term]
+
   before_action :check_owner, only: [:edit, :update, :activated, :deactivated]
   before_action :check_guesthouse_existence, only: [:new, :create]
   before_action :check_guesthouse_status, only: [:show]
@@ -64,16 +66,16 @@ class GuesthousesController < ApplicationController
 
   private
 
+  def guesthouse_params
+    params.require(:guesthouse).permit(:corporate_name, :trading_name, :registration_number, :description, :allow_pets, :usage_policy, :check_in, :check_out, :payment_methods, address_attributes: [:id, :street_name, :street_number, :complement, :district, :city, :state, :postal_code], contact_attributes: [:id, :phone, :email])
+  end
+
   def set_guesthouse
     @guesthouse = Guesthouse.find(params[:id])
   end
 
   def set_query
     @query = params[:query]
-  end
-
-  def guesthouse_params
-    params.require(:guesthouse).permit(:corporate_name, :trading_name, :registration_number, :description, :allow_pets, :usage_policy, :check_in, :check_out, :payment_methods, address_attributes: [:id, :street_name, :street_number, :complement, :district, :city, :state, :postal_code], contact_attributes: [:id, :phone, :email])
   end
 
   def check_owner

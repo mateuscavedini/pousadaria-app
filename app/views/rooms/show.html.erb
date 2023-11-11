@@ -10,29 +10,29 @@
 <% end %>
 
 <dl>
-  <dt>Nome:</dt>
+  <dt><%= Room.human_attribute_name :name %>:</dt>
   <dd><%= @room.name %></dd>
-  <dt>Descrição:</dt>
+  <dt><%= Room.human_attribute_name :description %>:</dt>
   <dd><%= @room.description %></dd>
-  <dt>Área:</dt>
+  <dt><%= Room.human_attribute_name :area %>:</dt>
   <dd><%= @room.area %>m²</dd>
-  <dt>Capacidade Máxima:</dt>
+  <dt><%= Room.human_attribute_name :max_capacity %>:</dt>
   <dd><%= @room.max_capacity %> pessoa(s)</dd>
-  <dt>Diária:</dt>
+  <dt><%= Room.human_attribute_name :daily_rate %>:</dt>
   <dd><%= number_to_currency(@room.daily_rate) %></dd>
-  <dt>Possui Banheiro?</dt>
+  <dt><%= Room.human_attribute_name :has_bathroom %></dt>
   <dd><%= t("yesno.#{@room.has_bathroom?}") %></dd>
-  <dt>Possui Varanda?</dt>
+  <dt><%= Room.human_attribute_name :has_balcony %></dt>
   <dd><%= t("yesno.#{@room.has_balcony?}") %></dd>
-  <dt>Possui Ar Condicionado?</dt>
+  <dt><%= Room.human_attribute_name :has_air_conditioner %></dt>
   <dd><%= t("yesno.#{@room.has_air_conditioner?}") %></dd>
-  <dt>Possui TV?</dt>
+  <dt><%= Room.human_attribute_name :has_tv %></dt>
   <dd><%= t("yesno.#{@room.has_tv?}") %></dd>
-  <dt>Possui Guarda-roupas?</dt>
+  <dt><%= Room.human_attribute_name :has_wardrobe %></dt>
   <dd><%= t("yesno.#{@room.has_wardrobe?}") %></dd>
-  <dt>Possui Cofre?</dt>
+  <dt><%= Room.human_attribute_name :has_safe %></dt>
   <dd><%= t("yesno.#{@room.has_safe?}") %></dd>
-  <dt>É acessível para PCDs?</dt>
+  <dt><%= Room.human_attribute_name :is_accessible %></dt>
   <dd><%= t("yesno.#{@room.is_accessible?}") %></dd>
 </dl>
 
@@ -43,9 +43,9 @@
     <table>
       <thead>
         <tr>
-          <th>Data Inicial</th>
-          <th>Data Final</th>
-          <th>Diária</th>
+          <th><%= SeasonalRate.human_attribute_name :start_date %></th>
+          <th><%= SeasonalRate.human_attribute_name :finish_date %></th>
+          <th><%= SeasonalRate.human_attribute_name :rate %></th>
           <th colspan="2" >Ações</th>
         </tr>
       </thead>
