@@ -1,12 +1,15 @@
-<h2><%= @guesthouse.trading_name %></h2>
+<h1><%= @guesthouse.trading_name %></h1>
 
 <% if owner_signed_in? && current_owner == @guesthouse.owner %>
-  <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %>
-  <% if @guesthouse.active? %>
-    <%= button_to 'Desativar Pousada', deactivated_guesthouse_path(@guesthouse) %>
-  <% else %>
-    <%= button_to 'Ativar Pousada', activated_guesthouse_path(@guesthouse) %>
-  <% end %>
+  <div class="owner-actions">
+    <%= link_to 'Editar', edit_guesthouse_path(@guesthouse), class: 'button' %>
+    <%= link_to 'Adicionar Quarto', new_guesthouse_room_path(@guesthouse), class: 'button' %>
+    <% if @guesthouse.active? %>
+      <%= button_to 'Desativar Pousada', deactivated_guesthouse_path(@guesthouse), class: 'button' %>
+    <% else %>
+      <%= button_to 'Ativar Pousada', activated_guesthouse_path(@guesthouse), class: 'button' %>
+    <% end %>
+  </div>
 <% end %>
 
 <dl>
@@ -28,27 +31,24 @@
   <dd><%= contact_description(@guesthouse.contact) %></dd>
 </dl>
 
-<% if owner_signed_in? && current_owner == @guesthouse.owner %>
-  <%= link_to 'Adicionar Quarto', new_guesthouse_room_path(@guesthouse) %>
-<% end %>
+<section id="guesthouse-rooms">
+  <h3>Quartos Disponíveis:</h3>
 
-<h3>Quartos Disponíveis:</h3>
-
-<% if owner_signed_in? && current_owner == @guesthouse.owner %>
-  <% if @guesthouse.rooms.any? %>
-    <% @guesthouse.rooms.each do |room| %>
-      <%= render room %>
+  <% if owner_signed_in? && current_owner == @guesthouse.owner %>
+    <% if @guesthouse.rooms.any? %>
+      <% @guesthouse.rooms.each do |room| %>
+        <%= render room %>
+      <% end %>
+    <% else %>
+      <p>Não existem quartos a serem exibidos.</p>
     <% end %>
   <% else %>
-    <p>Não existem quartos a serem exibidos.</p>
-  <% end %>
-<% else %>
-  <% if @guesthouse.rooms.active.any? %>
-    <% @guesthouse.rooms.active.each do |room| %>
-      <%= render room %>
+    <% if @guesthouse.rooms.active.any? %>
+      <% @guesthouse.rooms.active.each do |room| %>
+        <%= render room %>
+      <% end %>
+    <% else %>
+      <p>Não existem quartos a serem exibidos.</p>
     <% end %>
-  <% else %>
-    <p>Não existem quartos a serem exibidos.</p>
   <% end %>
-<% end %>
-
+</section>

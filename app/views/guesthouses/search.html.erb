@@ -1,8 +1,10 @@
-<h2>Resultados da Busca por: <%= @query %></h2>
-<h3><%= @guesthouses.count %> <%= Guesthouse.model_name.human(count: @guesthouses.count).downcase %> <%= t(:found_fem, count: @guesthouses.count) %></h3>
+<h1>Resultados da Busca por: <%= @query %></h1>
+<h4><%= @guesthouses.count %> <%= Guesthouse.model_name.human(count: @guesthouses.count).downcase %> <%= t(:found_fem, count: @guesthouses.count) %></h4>
 
-<% if @guesthouses.any? %>
-  <% @guesthouses.each do |guesthouse| %>
-    <p><%= link_to guesthouse.trading_name, guesthouse %></p>
+<div id="search-results">
+  <% if @guesthouses.any? %>
+    <% @guesthouses.each do |guesthouse| %>
+      <p><%= link_to guesthouse.trading_name, guesthouse %></p>
+    <% end %>
   <% end %>
-<% end %>
+</div>

@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  background-color: hsla(240, 5%, 13%, 100%);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-style: normal;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+body {
+  padding: 2rem 2rem 0.5rem 2rem;
+  section h3 {
+    margin-bottom: 1rem;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header p {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+header > a,
+a.button {
+  text-decoration: none;
+}
+
+main h1 {
+  margin-bottom: 0.75rem;
+}
+
+main h3 {
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+input,
+textarea {
+  background-color: white;
+  color: black;
+}
+
+dl {
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+dd {
+  text-indent: 1rem;
+}
+
+a {
+  text-decoration: underline;
+}
+
+input[type="submit"] {
+  padding: 0.25rem 0.75rem;
+}
+
+.button {
+  background-color: transparent;
+  font-size: 1rem;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid white;
+  transition: 0.15s ease-in;
+}
+
+.button:hover {
+  background-color: white;
+  color: hsla(240, 5%, 13%, 100%);
+}
+
+.button:active {
+  background-color: gray;
+  color: hsla(240, 5%, 13%, 100%);
+}
+
+.owner-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#session-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+#flash-messages {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 1.5rem 0;
+}
+
+#alert-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #AD1919;
+  width: 100%;
+  line-height: 4rem;
+}
+
+#notice-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #038E00;
+  width: 100%;
+  line-height: 4rem;
+}
+
+#search-results {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#city-links {
+  margin-bottom: 3rem;
+}
+
+#city-links ul {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#guesthouse-rooms h3 {
+  margin-top: 1rem;
+}

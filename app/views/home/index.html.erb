@@ -4,7 +4,7 @@
     <nav>
       <ul>
         <% @addresses.each do |address| %>
-          <li><%= link_to address.city, search_by_city_guesthouses_path(query: address.city) %></li>
+          <li><%= link_to address.city, search_by_city_guesthouses_path(query: address.city), class: 'button' %></li>
         <% end %>
       </ul>
     </nav>
@@ -12,20 +12,20 @@
 <% end %>
 
 <% if @recent_guesthouses.any? %>
-  <div id="recent-guesthouses">
+  <section id="recent-guesthouses">
     <h3>Pousadas Adicionadas Recentemente</h3>
     <% @recent_guesthouses.each do |guesthouse| %>
       <%= render guesthouse %>
     <% end %>
-  </div>
+  </section>
   
   <% if @guesthouses.any? %>
-    <div id="remaining-guesthouses">
+    <section id="remaining-guesthouses">
       <h3>Outras Pousadas</h3>
       <% @guesthouses.each do |guesthouse| %>
         <%= render guesthouse %>
       <% end %>
-    </div>
+    </section>
   <% end %>
 <% else %>
   <p>Não existem pousadas cadastradas.</p>

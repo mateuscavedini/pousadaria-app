@@ -12,7 +12,7 @@
   <body>
     <header>
       <%= link_to root_path do %>
-        <h1>Pousadaria</h1>
+        <p>Pousadaria</p>
       <% end %>
 
       <%= form_with url: search_by_term_guesthouses_path, method: :get do |f| %>
@@ -22,8 +22,9 @@
       <% end %>
 
       <nav>
-        <ul>
+        <ul id="session-links">
           <% if owner_signed_in? %>
+            <li><%= owner_description(current_owner) %></li>
             <li>
               <% if current_owner.guesthouse %>
                 <%= link_to 'Minha Pousada', my_guesthouse_path %>
@@ -31,18 +32,20 @@
                 <%= link_to 'Cadastrar Pousada', new_guesthouse_path %>
               <% end %>
             </li>
-            <li><%= owner_description(current_owner) %></li>
-            <li><%= button_to 'Sair', destroy_owner_session_path, method: :delete %></li>
+            <li><%= button_to 'Sair', destroy_owner_session_path, method: :delete, class: 'button' %></li>
           <% else %>
             <li>Registre-se como: <%= link_to 'Hóspede', root_path %> | <%= link_to 'Proprietário', new_owner_registration_path %></li>
-            <li><%= link_to 'Entrar', new_owner_session_path %></li>
+            <li><%= link_to 'Entrar', new_owner_session_path, class: 'button' %></li>
           <% end %>
         </ul>
       </nav>
     </header>
 
-    <%= alert %>
-    <%= notice %>
+    <div id="flash-messages">
+      <p id="alert-message"><%= alert %></p>
+      <p id="notice-message"><%= notice %></p>
+    </div>
+
     <main>
       <%= yield %>
     </main>
