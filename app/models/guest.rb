@@ -6,4 +6,7 @@ class Guest < ApplicationRecord
 
   has_many :bookings
   has_many :rooms, through: :bookings
+
+  validates :first_name, :last_name, :social_number, presence: true
+  validates :social_number, uniqueness: true
 end
