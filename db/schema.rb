@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_09_060507) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_14_230004) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_name"
     t.string "street_number"
@@ -23,6 +23,22 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_060507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guesthouse_id"], name: "index_addresses_on_guesthouse_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "guest_id", null: false
+    t.integer "room_id", null: false
+    t.string "code"
+    t.decimal "total_price", precision: 8, scale: 2
+    t.date "start_date"
+    t.date "finish_date"
+    t.integer "status", default: 0
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_bookings_on_guest_id"
+    t.index ["room_id"], name: "index_bookings_on_room_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -49,6 +65,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_060507) do
     t.integer "owner_id", null: false
     t.integer "status", default: 0
     t.index ["owner_id"], name: "index_guesthouses_on_owner_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "social_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_guests_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true
   end
 
   create_table "owners", force: :cascade do |t|
@@ -96,6 +127,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_060507) do
   end
 
   add_foreign_key "addresses", "guesthouses"
+  add_foreign_key "bookings", "guests"
+  add_foreign_key "bookings", "rooms"
   add_foreign_key "contacts", "guesthouses"
   add_foreign_key "guesthouses", "owners"
   add_foreign_key "rooms", "guesthouses"

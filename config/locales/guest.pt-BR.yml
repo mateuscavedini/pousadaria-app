@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      guest:
+        one: Hóspede
+        other: Hóspedes
+    attributes:
+      guest:
+        first_name: Nome
+        last_name: Sobrenome
+        social_number: CPF
+        email: E-mail
+        password: Senha
