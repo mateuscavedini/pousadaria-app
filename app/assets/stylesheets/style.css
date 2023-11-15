@@ -30,7 +30,8 @@ header p {
 }
 
 header > a,
-a.button {
+a.button,
+a.session-button {
   text-decoration: none;
 }
 
@@ -74,16 +75,27 @@ input[type="submit"] {
   font-size: 1rem;
   color: white;
   padding: 0.25rem 0.75rem;
-  border: 2px solid white;
+  border: 1px solid white;
   transition: 0.15s ease-in;
 }
 
-.button:hover {
+.session-button {
+  background-color: transparent;
+  font-size: 1rem;
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid white;
+  transition: 0.15s ease-in;
+}
+
+.button:hover,
+.session-button:hover {
   background-color: white;
   color: hsla(240, 5%, 13%, 100%);
 }
 
-.button:active {
+.button:active,
+.session-button:active {
   background-color: gray;
   color: hsla(240, 5%, 13%, 100%);
 }
@@ -93,7 +105,7 @@ input[type="submit"] {
   gap: 0.5rem;
 }
 
-#session-links {
+#header-links {
   display: flex;
   gap: 1.25rem;
   align-items: center;

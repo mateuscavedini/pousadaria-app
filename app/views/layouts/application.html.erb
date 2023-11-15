@@ -22,7 +22,7 @@
       <% end %>
 
       <nav>
-        <ul id="session-links">
+        <ul id="header-links">
           <% if owner_signed_in? %>
             <li><%= owner_description(current_owner) %></li>
             <li>
@@ -33,9 +33,11 @@
               <% end %>
             </li>
             <li><%= button_to 'Sair', destroy_owner_session_path, method: :delete, class: 'button' %></li>
+          <% elsif guest_signed_in? %>
+            <li><%= button_to 'Sair', destroy_guest_session_path, method: :delete, class: 'button' %></li>
           <% else %>
-            <li>Registre-se como: <%= link_to 'Hóspede', root_path %> | <%= link_to 'Proprietário', new_owner_registration_path %></li>
-            <li><%= link_to 'Entrar', new_owner_session_path, class: 'button' %></li>
+            <li id="guest-session-links">Hóspede: <%= link_to 'Registrar', new_guest_registration_path, class: 'session-button' %> | <%= link_to 'Entrar', new_guest_session_path, class: 'session-button' %></li>
+            <li id="owner-session-links">Proprietário: <%= link_to 'Registrar', new_owner_registration_path, class: 'session-button' %> | <%= link_to 'Entrar', new_owner_session_path, class: 'session-button' %></li>
           <% end %>
         </ul>
       </nav>
