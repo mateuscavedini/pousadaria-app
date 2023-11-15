@@ -1,6 +1,8 @@
 class Room < ApplicationRecord
   belongs_to :guesthouse
   has_many :seasonal_rates
+  has_many :bookings
+  has_many :guests, through: :bookings
 
   enum status: { active: 0, inactive: 2 }
 

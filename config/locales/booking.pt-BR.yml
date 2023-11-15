@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      booking:
+        one: Reserva
+        other: Reservas
+    attributes:
+      booking:
+        code: Código
+        total_price: Total a Pagar
+        start_date: Data Inicial
+        finish_date: Data Final
+        status: Status
+        check_in: Momento de Check-In
+        check_out: Momento de Check-Out
+        guest_id: Hóspede
+        room_id: Quarto
