@@ -10,7 +10,7 @@ describe 'Proprietário cadastra preço sazonal' do
     jose_room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: jose_guesthouse)
     seasonal_rate_params = { seasonal_rate: { start_date: 10.days.from_now, finish_date: 20.days.from_now, rate: 114.99} }
 
-    login_as maria
+    login_as maria, scope: :owner
     post room_seasonal_rates_path(jose_room), params: seasonal_rate_params
 
     expect(response).to redirect_to root_path

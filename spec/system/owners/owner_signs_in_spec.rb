@@ -5,7 +5,7 @@ describe 'Proprietário se autentica' do
     Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
 
     visit root_path
-    within 'header nav' do
+    within '#owner-session-links' do
       click_on 'Entrar'
     end
     fill_in 'E-mail', with: 'maria@email.com'
@@ -25,7 +25,7 @@ describe 'Proprietário se autentica' do
   it 'e faz logout' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     within 'header nav' do
       click_on 'Sair'

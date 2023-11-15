@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Usuário cria conta como proprietário de pousada' do
   it 'a partir do menu' do
     visit root_path
-    within 'header nav' do
-      click_on 'Proprietário'
+    within '#owner-session-links' do
+      click_on 'Registrar'
     end
 
     expect(current_path).to eq new_owner_registration_path
@@ -18,7 +18,9 @@ describe 'Usuário cria conta como proprietário de pousada' do
 
   it 'com sucesso' do
     visit root_path
-    click_on 'Proprietário'
+    within '#owner-session-links' do
+      click_on 'Registrar'
+    end
     fill_in 'Nome', with: 'Teste'
     fill_in 'E-mail', with: 'proprietario@teste.com'
     fill_in 'Senha', with: 'senha12345'
@@ -39,7 +41,9 @@ describe 'Usuário cria conta como proprietário de pousada' do
 
   it 'com dados insuficientes' do
     visit root_path
-    click_on 'Proprietário'
+    within '#owner-session-links' do
+      click_on 'Registrar'
+    end
     fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Senha', with: ''

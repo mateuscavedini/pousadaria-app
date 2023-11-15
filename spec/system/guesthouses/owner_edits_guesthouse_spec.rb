@@ -18,7 +18,7 @@ describe 'Proprietário edita sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
     
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     within 'header nav' do
       click_on 'Minha Pousada'
@@ -43,7 +43,7 @@ describe 'Proprietário edita sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Minha Pousada'
     click_on 'Editar'
@@ -94,7 +94,7 @@ describe 'Proprietário edita sua pousada' do
     other_contact_attributes = { phone: '11952387221', email: 'contato@palmeiras.com' }
     jose_guesthouse = Guesthouse.create!(corporate_name: 'Pousadas e Hotéis Brasil LTDA', trading_name: 'Pousada do José', registration_number: '98765432000900', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: true, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: other_address_attributes, contact_attributes: other_contact_attributes, owner: jose)
 
-    login_as maria
+    login_as maria, scope: :owner
     visit edit_guesthouse_path(jose_guesthouse)
 
     expect(current_path).to eq root_path

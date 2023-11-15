@@ -9,7 +9,7 @@ describe 'Proprietário altera status de um preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     SeasonalRate.create!(start_date: 10.days.from_now, finish_date: 20.days.from_now, rate: 85.50, room: room, status: :inactive)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
     click_on 'Primeiro Quarto'
@@ -32,7 +32,7 @@ describe 'Proprietário altera status de um preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     SeasonalRate.create!(start_date: 10.days.from_now, finish_date: 20.days.from_now, rate: 85.50, room: room, status: :active)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
     click_on 'Primeiro Quarto'

@@ -78,7 +78,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Minha Pousada'
 
@@ -99,7 +99,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Minha Pousada'
 
@@ -112,7 +112,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner, status: :active)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Minha Pousada'
 
@@ -125,7 +125,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner, status: :inactive)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Minha Pousada'
 
@@ -139,7 +139,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: other_owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
 
@@ -153,7 +153,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: other_owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
 
@@ -168,7 +168,7 @@ describe 'Proprietário vê detalhes de sua pousada' do
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
     Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: other_owner)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
 

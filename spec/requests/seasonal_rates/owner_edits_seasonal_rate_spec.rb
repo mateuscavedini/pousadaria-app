@@ -10,7 +10,7 @@ describe 'Usuário edita preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     jose_seasonal_rate = SeasonalRate.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, rate: 75, room: room)
 
-    login_as maria
+    login_as maria, scope: :owner
     patch seasonal_rate_path(jose_seasonal_rate), params: { seasonal_rate: { rate: 25 } }
 
     expect(response).to redirect_to root_path

@@ -22,7 +22,7 @@ describe 'Proprietário edita preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     SeasonalRate.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, rate: 75, room: room)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
     click_on 'Primeiro Quarto'
@@ -45,7 +45,7 @@ describe 'Proprietário edita preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     SeasonalRate.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, rate: 75, room: room)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
     click_on 'Primeiro Quarto'
@@ -70,7 +70,7 @@ describe 'Proprietário edita preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     SeasonalRate.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, rate: 75, room: room)
 
-    login_as owner
+    login_as owner, scope: :owner
     visit root_path
     click_on 'Pousada Teste'
     click_on 'Primeiro Quarto'
@@ -99,7 +99,7 @@ describe 'Proprietário edita preço sazonal' do
     room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
     jose_seasonal_rate = SeasonalRate.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, rate: 75, room: room)
 
-    login_as maria
+    login_as maria, scope: :owner
     visit edit_seasonal_rate_path(jose_seasonal_rate)
 
     expect(current_path).to eq root_path
