@@ -33,9 +33,10 @@ describe 'Usuário cria conta como proprietário de pousada' do
     within 'header nav' do
       expect(page).to have_content 'Teste | proprietario@teste.com'
       expect(page).to have_button 'Sair'
-      expect(page).not_to have_content 'Registre-se como:'
-      expect(page).not_to have_link 'Hóspede'
-      expect(page).not_to have_link 'Proprietário'
+      expect(page).not_to have_content 'Hóspede'
+      expect(page).not_to have_content 'Proprietário'
+      expect(page).not_to have_link 'Registrar'
+      expect(page).not_to have_link 'Entrar'
     end
   end
 
