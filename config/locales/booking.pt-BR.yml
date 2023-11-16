@@ -11,6 +11,7 @@ pt-BR:
         start_date: Data Inicial
         finish_date: Data Final
         status: Status
+        guests_number: Quantidade de Hóspedes
         check_in: Momento de Check-In
         check_out: Momento de Check-Out
         guest_id: Hóspede
