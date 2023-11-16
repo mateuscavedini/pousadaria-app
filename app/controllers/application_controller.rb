@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  protected
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  def devise_parameter_sanitizer
+    if resource_class == Owner
+      OwnerParameterSanitizer.new(Owner, :owner, params)
+    elsif resource_class == Guest
+      GuestParameterSanitizer.new(Guest, :guest, params)
+    else
+      super
+    end
   end
 end
