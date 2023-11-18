@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário realiza reserva de quarto' do
-  it 'e precisa estar autenticado para confirmar' do
+  it 'e precisa estar autenticado como hóspede para confirmar' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
