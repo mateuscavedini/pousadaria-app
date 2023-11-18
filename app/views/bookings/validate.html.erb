@@ -3,6 +3,21 @@
 <dl>
   <dt><%= Booking.human_attribute_name :total_price %>:</dt>
   <dd><%= number_to_currency(@booking.total_price) %></dd>
+
+  <% if guest_signed_in? %>
+  <dt><%= Booking.human_attribute_name :start_date %>:</dt>
+  <dd><%= I18n.localize(@booking.start_date) %></dd>
+  <dt><%= Guesthouse.human_attribute_name :check_in %>:</dt>
+  <dd><%= guesthouse_format_time(@booking.room.guesthouse.check_in) %></dd>
+  <dt><%= Booking.human_attribute_name :finish_date %>:</dt>
+  <dd><%= I18n.localize(@booking.finish_date) %></dd>
+  <dt><%= Guesthouse.human_attribute_name :check_out %>:</dt>
+  <dd><%= guesthouse_format_time(@booking.room.guesthouse.check_out) %></dd>
+  <dt><%= Room.model_name.human %>:</dt>
+  <dd><%= @booking.room.name %></dd>
+  <dt><%= Guesthouse.human_attribute_name :payment_methods %>:</dt>
+  <dd><%= @booking.room.guesthouse.payment_methods %></dd>
+  <% end %>
 </dl>
 
 <%= button_to 'Confirmar Reserva', room_bookings_path, params: { booking: { start_date: @booking.start_date, finish_date: @booking.finish_date, guests_number: @booking.guests_number, total_price: @booking.total_price, room_id: @room.id } } %>
