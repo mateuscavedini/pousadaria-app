@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     post 'deactivated', on: :member
 
     resources :seasonal_rates, only: [:new, :create]
+    resources :bookings, only: [:new, :create]
+    get 'validate_booking', to: 'bookings#validate'
   end
 
   resources :seasonal_rates, only: [:edit, :update] do

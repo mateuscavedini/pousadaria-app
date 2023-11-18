@@ -39,6 +39,10 @@
   <dd><%= t("yesno.#{@room.is_accessible?}") %></dd>
 </dl>
 
+<% unless owner_signed_in? %>
+  <%= link_to 'Reserva Prévia', new_room_booking_path(@room) %>
+<% end %>
+
 <section id="room-seasonal-rates">
   <% if owner_signed_in? && current_owner == @room.guesthouse.owner %>
     <h3>Preços Sazonais</h3>

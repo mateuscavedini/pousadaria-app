@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  belongs_to :guest
+  belongs_to :guest, optional: true
   belongs_to :room
 
   enum status: { pending: 0, ongoing: 2, finished: 4, canceled: 6 }

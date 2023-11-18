@@ -1,0 +1,21 @@
+<h3>Informações da Reserva</h3>
+
+<%= render 'errors' %>
+
+<%= form_with model: [@room, @booking], url: room_validate_booking_path(@room), method: :get do |f| %>
+  <div>
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+  <div>
+    <%= f.label :finish_date %>
+    <%= f.date_field :finish_date %>
+  </div>
+  <div>
+    <%= f.label :guests_number %>
+    <%= f.number_field :guests_number %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

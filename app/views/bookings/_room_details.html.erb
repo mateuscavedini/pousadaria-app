@@ -1,0 +1,28 @@
+<h3>Detalhes do Quarto</h3>
+
+<dl>
+  <dt><%= Room.human_attribute_name :name %>:</dt>
+  <dd><%= @room.name %></dd>
+  <dt><%= Room.human_attribute_name :description %>:</dt>
+  <dd><%= @room.description %></dd>
+  <dt><%= Room.human_attribute_name :area %>:</dt>
+  <dd><%= @room.area %>m²</dd>
+  <dt><%= Room.human_attribute_name :max_capacity %>:</dt>
+  <dd><%= @room.max_capacity %> pessoa(s)</dd>
+  <dt><%= Room.human_attribute_name :daily_rate %>:</dt>
+  <dd><%= number_to_currency(@room.daily_rate) %></dd>
+  <dt><%= Room.human_attribute_name :has_bathroom %></dt>
+  <dd><%= t("yesno.#{@room.has_bathroom?}") %></dd>
+  <dt><%= Room.human_attribute_name :has_balcony %></dt>
+  <dd><%= t("yesno.#{@room.has_balcony?}") %></dd>
+  <dt><%= Room.human_attribute_name :has_air_conditioner %></dt>
+  <dd><%= t("yesno.#{@room.has_air_conditioner?}") %></dd>
+  <dt><%= Room.human_attribute_name :has_tv %></dt>
+  <dd><%= t("yesno.#{@room.has_tv?}") %></dd>
+  <dt><%= Room.human_attribute_name :has_wardrobe %></dt>
+  <dd><%= t("yesno.#{@room.has_wardrobe?}") %></dd>
+  <dt><%= Room.human_attribute_name :has_safe %></dt>
+  <dd><%= t("yesno.#{@room.has_safe?}") %></dd>
+  <dt><%= Room.human_attribute_name :is_accessible %></dt>
+  <dd><%= t("yesno.#{@room.is_accessible?}") %></dd>
+</dl>
