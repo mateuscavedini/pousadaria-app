@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     post 'activated', on: :member
     post 'deactivated', on: :member
   end
+
+  resorces :bookings, only: [] do
+    post 'ongoing', on: :member
+    post 'finished', on: :member
+    post 'canceled', on: :member
+  end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
   get 'my-bookings', to: 'bookings#my_bookings'
