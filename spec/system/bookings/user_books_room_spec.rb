@@ -215,6 +215,7 @@ describe 'Hóspede realiza reserva de quarto' do
     guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
     Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse, status: :active)
     guest = Guest.create!(first_name: 'Maria', last_name: 'da Silva', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('COD12345')
 
     login_as guest, scope: :guest
     visit root_path
@@ -229,6 +230,7 @@ describe 'Hóspede realiza reserva de quarto' do
 
     expect(page).to have_content 'Minhas Reservas'
     expect(page).to have_content 'Reserva confirmada com sucesso.'
+    expect(page).to have_content 'COD12345'
     expect(page).to have_content 'Pousada Teste'
     expect(page).to have_content 'Primeiro Quarto'
     expect(page).to have_content I18n.localize(1.day.from_now.to_date)

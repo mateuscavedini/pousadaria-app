@@ -4,6 +4,7 @@
   <table>
     <thead>
       <tr>
+        <th><%= Booking.human_attribute_name :code %></th>
         <% if guest_signed_in? %>
           <th><%= Guesthouse.model_name.human %></th>
         <% end %>
@@ -15,6 +16,7 @@
     <tbody>
       <% @bookings.each do |booking| %>
         <tr>
+          <td><%= booking.code %></td>
           <% if guest_signed_in? %>
             <td><%= booking.room.guesthouse.trading_name %></td>
           <% end %>

@@ -25,9 +25,9 @@ describe 'Hóspede vê todas suas reservas' do
     second_room = Room.create!(name: 'Segundo Quarto', description: 'Segundo quarto a ser cadastrado', area: 30, max_capacity: 1, daily_rate: 50, has_bathroom: true, has_balcony: false, has_air_conditioner: false, has_tv: true, has_wardrobe: false, has_safe: false, is_accessible: true, guesthouse: guesthouse, status: :active)
     maria = Guest.create!(first_name: 'Maria', last_name: 'dos Santos', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
     jose = Guest.create!(first_name: 'José', last_name: 'Alves', social_number: '99988877765', email: 'jose@email.com', password: 'senha123')
-    Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 1, total_price: first_room.calculate_total_price(1.day.from_now, 5.days.from_now), room: first_room, guest: maria)
-    Booking.create!(start_date: 6.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: first_room.calculate_total_price(6.days.from_now, 10.days.from_now), room: first_room, guest: jose)
-    Booking.create!(start_date: 11.day.from_now, finish_date: 15.days.from_now, guests_number: 1, total_price: second_room.calculate_total_price(11.day.from_now, 15.days.from_now), room: second_room, guest: maria)
+    first_booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 1, total_price: first_room.calculate_total_price(1.day.from_now, 5.days.from_now), room: first_room, guest: maria)
+    second_booking = Booking.create!(start_date: 6.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: first_room.calculate_total_price(6.days.from_now, 10.days.from_now), room: first_room, guest: jose)
+    third_booking = Booking.create!(start_date: 11.day.from_now, finish_date: 15.days.from_now, guests_number: 1, total_price: second_room.calculate_total_price(11.day.from_now, 15.days.from_now), room: second_room, guest: maria)
 
     login_as maria, scope: :guest
     visit root_path
@@ -35,14 +35,17 @@ describe 'Hóspede vê todas suas reservas' do
       click_on 'Minhas Reservas'
     end
 
+    expect(page).to have_content first_booking.code
     expect(page).to have_content 'Pousada Teste'
     expect(page).to have_content 'Primeiro Quarto'
     expect(page).to have_content I18n.localize(1.day.from_now.to_date)
     expect(page).to have_content I18n.localize(5.days.from_now.to_date)
+    expect(page).to have_content third_booking.code
     expect(page).to have_content 'Pousada Teste'
     expect(page).to have_content 'Segundo Quarto'
     expect(page).to have_content I18n.localize(11.day.from_now.to_date)
     expect(page).to have_content I18n.localize(15.days.from_now.to_date)
+    expect(page).not_to have_content second_booking.code
     expect(page).not_to have_content I18n.localize(6.day.from_now.to_date)
     expect(page).not_to have_content I18n.localize(10.days.from_now.to_date)
   end
@@ -68,9 +71,9 @@ describe 'Proprietário vê todas as reservas de sua pousada' do
     second_room = Room.create!(name: 'Segundo Quarto', description: 'Segundo quarto a ser cadastrado', area: 30, max_capacity: 1, daily_rate: 50, has_bathroom: true, has_balcony: false, has_air_conditioner: false, has_tv: true, has_wardrobe: false, has_safe: false, is_accessible: true, guesthouse: guesthouse, status: :active)
     maria = Guest.create!(first_name: 'Maria', last_name: 'dos Santos', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
     jose = Guest.create!(first_name: 'José', last_name: 'Alves', social_number: '99988877765', email: 'jose@email.com', password: 'senha123')
-    Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 1, total_price: first_room.calculate_total_price(1.day.from_now, 5.days.from_now), room: first_room, guest: maria)
-    Booking.create!(start_date: 6.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: first_room.calculate_total_price(6.days.from_now, 10.days.from_now), room: first_room, guest: jose)
-    Booking.create!(start_date: 11.day.from_now, finish_date: 15.days.from_now, guests_number: 1, total_price: second_room.calculate_total_price(11.day.from_now, 15.days.from_now), room: second_room, guest: maria)
+    first_booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 1, total_price: first_room.calculate_total_price(1.day.from_now, 5.days.from_now), room: first_room, guest: maria)
+    second_booking = Booking.create!(start_date: 6.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: first_room.calculate_total_price(6.days.from_now, 10.days.from_now), room: first_room, guest: jose)
+    third_booking = Booking.create!(start_date: 11.day.from_now, finish_date: 15.days.from_now, guests_number: 1, total_price: second_room.calculate_total_price(11.day.from_now, 15.days.from_now), room: second_room, guest: maria)
 
     login_as owner, scope: :owner
     visit root_path
@@ -78,14 +81,9 @@ describe 'Proprietário vê todas as reservas de sua pousada' do
       click_on 'Reservas'
     end
 
-    expect(page).to have_content 'Primeiro Quarto'
-    expect(page).to have_content I18n.localize(1.day.from_now.to_date)
-    expect(page).to have_content I18n.localize(5.days.from_now.to_date)
-    expect(page).to have_content I18n.localize(6.day.from_now.to_date)
-    expect(page).to have_content I18n.localize(10.days.from_now.to_date)
-    expect(page).to have_content 'Segundo Quarto'
-    expect(page).to have_content I18n.localize(11.day.from_now.to_date)
-    expect(page).to have_content I18n.localize(15.days.from_now.to_date)
+    expect(page).to have_content first_booking.code
+    expect(page).to have_content second_booking.code
+    expect(page).to have_content third_booking.code
     expect(page).not_to have_content 'Pousada Teste'
   end
 end
