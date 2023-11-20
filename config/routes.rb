@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
+  get 'my-bookings', to: 'bookings#my_bookings'
 end

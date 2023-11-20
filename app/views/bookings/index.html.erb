@@ -1,0 +1,30 @@
+<h1>Minhas Reservas</h1>
+
+<% if @bookings.any? %>
+  <table>
+    <thead>
+      <tr>
+        <% if guest_signed_in? %>
+          <th><%= Guesthouse.model_name.human %></th>
+        <% end %>
+        <th><%= Room.model_name.human %></th>
+        <th><%= Booking.human_attribute_name :start_date %></th>
+        <th><%= Booking.human_attribute_name :finish_date %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <% if guest_signed_in? %>
+            <td><%= booking.room.guesthouse.trading_name %></td>
+          <% end %>
+          <td><%= booking.room.name %></td>
+          <td><%= I18n.localize(booking.start_date) %></td>
+          <td><%= I18n.localize(booking.finish_date) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Você ainda não tem nenhuma reserva.</p>
+<% end %>

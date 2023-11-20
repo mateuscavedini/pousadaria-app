@@ -1,5 +1,8 @@
 class BookingsController < ApplicationController
+  devise_group :app_user, contains: [:guest, :owner]
+
   before_action :authenticate_guest!, only: [:create]
+  before_action :authenticate_app_user!, only: [:my_bookings]
 
   before_action :set_room, only: [:new, :validate]
   
@@ -19,6 +22,29 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @booking = current_guest.bookings.build(booking_params)
+
+    if @booking.save
+      redirect_to my_bookings_path, notice: 'Reserva confirmada com sucesso.'
+    else
+      flash.now[:alert] = 'Não foi possível confirmar a reserva.'
+      render :new
+    end
+  end
+
+  def my_bookings
+    if owner_signed_in?
+      @bookings = []
+      current_owner.guesthouse.rooms.each do |room|
+        room.bookings.each do |booking|
+          @bookings << booking
+        end
+      end
+    elsif guest_signed_in?
+      @bookings = current_guest.bookings
+    end
+    
+    render :index
   end
 
   private

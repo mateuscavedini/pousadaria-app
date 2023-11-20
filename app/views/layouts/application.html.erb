@@ -25,16 +25,16 @@
         <ul id="header-links">
           <% if owner_signed_in? %>
             <li><%= owner_description(current_owner) %></li>
-            <li>
-              <% if current_owner.guesthouse %>
-                <%= link_to 'Minha Pousada', my_guesthouse_path %>
-              <% else %>
-                <%= link_to 'Cadastrar Pousada', new_guesthouse_path %>
-              <% end %>
-            </li>
+            <% if current_owner.guesthouse %>
+              <li><%= link_to 'Minha Pousada', my_guesthouse_path %></li>
+              <li><%= link_to 'Reservas', my_bookings_path %></li>
+            <% else %>
+              <li><%= link_to 'Cadastrar Pousada', new_guesthouse_path %></li>
+            <% end %>
             <li><%= button_to 'Sair', destroy_owner_session_path, method: :delete, class: 'button' %></li>
           <% elsif guest_signed_in? %>
             <li><%= guest_full_name(current_guest) %></li>
+            <li><%= link_to 'Minhas Reservas', my_bookings_path %></li>
             <li><%= button_to 'Sair', destroy_guest_session_path, method: :delete, class: 'button' %></li>
           <% else %>
             <li id="guest-session-links">Hóspede: <%= link_to 'Registrar', new_guest_registration_path, class: 'session-button' %> | <%= link_to 'Entrar', new_guest_session_path, class: 'session-button' %></li>
