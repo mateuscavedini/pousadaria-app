@@ -38,16 +38,14 @@ describe 'Proprietário vê detalhes de uma reserva' do
     guest = Guest.create!(first_name: 'Maria', last_name: 'dos Santos', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
     booking = Booking.create!(start_date: 5.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: room.calculate_total_price(5.days.from_now.to_date, 10.days.from_now.to_date), room: room, guest: guest)
 
-    travel_to 5.days.from_now
-    
-    login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
-    
-    expect(page).to have_button 'Realizar Check-In'
-
-    travel_back
+    travel_to 5.days.from_now do
+      login_as owner, scope: :owner
+      visit root_path
+      click_on 'Reservas'
+      click_on booking.code
+      
+      expect(page).to have_button 'Realizar Check-In'
+    end
   end
 
   it 'e não vê botão para realizar check-in de hóspede enquanto não chegar na data informada' do
@@ -76,16 +74,14 @@ describe 'Proprietário vê detalhes de uma reserva' do
     guest = Guest.create!(first_name: 'Maria', last_name: 'dos Santos', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
     booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest)
 
-    travel_to 3.days.from_now
-
-    login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
-
-    expect(page).to have_button 'Cancelar Reserva'
-
-    travel_back
+    travel_to 3.days.from_now do
+      login_as owner, scope: :owner
+      visit root_path
+      click_on 'Reservas'
+      click_on booking.code
+  
+      expect(page).to have_button 'Cancelar Reserva'
+    end
   end
 
   it 'e não vê botão para cancelar reserva enquanto não tenham se passados ao menos dois dias do check-in' do
