@@ -11,8 +11,7 @@ class BookingsController < ApplicationController
   before_action :check_owner, only: [:ongoing]
   before_action :check_guest, only: [:canceled]
   before_action :check_status_pending, only: [:ongoing, :canceled]
-  before_action :check_start_date_ongoing, only: [:ongoing]
-  before_action :check_start_date_canceled, only: [:canceled]
+  before_action :check_start_date, only: [:ongoing, :canceled]
   
   def new
     @booking = @room.bookings.build
@@ -57,6 +56,7 @@ class BookingsController < ApplicationController
 
   def ongoing
     @booking.ongoing!
+    @booking.check_in = Time.current
 
     redirect_to booking_path(@booking), notice: 'Check-In realizado com sucesso.'
   end
@@ -98,14 +98,12 @@ class BookingsController < ApplicationController
   def check_status_pending
     redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.pending?
   end
-
-  def check_start_date_canceled
+  
+  def check_start_date
     if guest_signed_in?
       redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Date.current >= 7
+    else
+      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Date.current >= @booking.start_date
     end
-  end
-
-  def check_start_date_ongoing
-    redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Date.current >= @booking.start_date
   end
 end
