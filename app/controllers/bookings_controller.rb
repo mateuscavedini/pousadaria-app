@@ -7,6 +7,9 @@ class BookingsController < ApplicationController
 
   before_action :set_room, only: [:new, :validate]
   before_action :set_booking, only: [:show, :ongoing, :finished, :canceled]
+
+  before_action :check_guest, only: [:canceled]
+  before_action :check_status_pending, only: [:canceled]
   
   def new
     @booking = @room.bookings.build
@@ -52,13 +55,13 @@ class BookingsController < ApplicationController
   def ongoing
     @booking.ongoing!
 
-    redirect_to my_bookings_path, notice: 'Status da reserva alterado para Em Andamento.'
+    redirect_to booking_path(@booking), notice: 'Status da reserva alterado para Em Andamento.'
   end
 
   def finished
     @booking.finished!
 
-    redirect_to my_bookings_path, notice: 'Status da reserva alterado para Finalizado.'
+    redirect_to booking_path(@booking), notice: 'Status da reserva alterado para Finalizado.'
   end
 
   def canceled
@@ -66,10 +69,10 @@ class BookingsController < ApplicationController
       flash[:alert] = 'O prazo para cancelar a reserva expirou.'
     else
       @booking.canceled!
-      flash[:notice] =  'Status da reserva alterado para Cancelado.'
+      flash[:notice] =  'Reserva cancelada com sucesso.'
     end
 
-    redirect_to my_bookings_path
+    redirect_to booking_path(@booking)
   end
 
   private
@@ -84,5 +87,13 @@ class BookingsController < ApplicationController
   
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def check_guest
+    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_guest == @booking.guest
+  end
+
+  def check_status_pending
+    redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.pending?
   end
 end

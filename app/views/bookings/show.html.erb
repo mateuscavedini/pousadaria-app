@@ -22,7 +22,7 @@
   <dd><%= t(@booking.status) %></dd>
 </dl>
 
-<% if guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2 %>
+<% if !@booking.canceled? && (guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2) %>
   <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
 <% end %>
 
