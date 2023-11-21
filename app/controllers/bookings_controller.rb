@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   devise_group :app_user, contains: [:guest, :owner]
 
   before_action :authenticate_guest!, only: [:create]
-  before_action :authenticate_owner!, only: [:ongoing, :finished]
+  before_action :authenticate_owner!, only: [:ongoing, :finished, :my_ongoing_bookings]
   before_action :authenticate_app_user!, only: [:show, :my_bookings, :canceled]
 
   before_action :set_room, only: [:new, :validate]
@@ -42,6 +42,7 @@ class BookingsController < ApplicationController
   def my_bookings
     if owner_signed_in?
       @bookings = []
+
       current_owner.guesthouse.rooms.each do |room|
         room.bookings.each do |booking|
           @bookings << booking
@@ -51,6 +52,18 @@ class BookingsController < ApplicationController
       @bookings = current_guest.bookings
     end
     
+    render :index
+  end
+
+  def my_ongoing_bookings
+    @bookings = []
+
+    current_owner.guesthouse.rooms.each do |room|
+      room.bookings.ongoing.each do |booking|
+        @bookings << booking
+      end
+    end
+
     render :index
   end
 
