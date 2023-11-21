@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     post 'deactivated', on: :member
   end
 
-  resorces :bookings, only: [] do
+  resources :bookings, only: [:show] do
     post 'ongoing', on: :member
     post 'finished', on: :member
     post 'canceled', on: :member

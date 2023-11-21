@@ -45,6 +45,7 @@ describe 'Hóspede vê todas suas reservas' do
     expect(page).to have_content 'Segundo Quarto'
     expect(page).to have_content I18n.localize(11.day.from_now.to_date)
     expect(page).to have_content I18n.localize(15.days.from_now.to_date)
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content second_booking.code
     expect(page).not_to have_content I18n.localize(6.day.from_now.to_date)
     expect(page).not_to have_content I18n.localize(10.days.from_now.to_date)

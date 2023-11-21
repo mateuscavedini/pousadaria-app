@@ -3,10 +3,10 @@ class BookingsController < ApplicationController
 
   before_action :authenticate_guest!, only: [:create]
   before_action :authenticate_owner!, only: [:ongoing, :finished]
-  before_action :authenticate_app_user!, only: [:my_bookings, :canceled]
+  before_action :authenticate_app_user!, only: [:show, :my_bookings, :canceled]
 
   before_action :set_room, only: [:new, :validate]
-  before_action :set_booking, only: [:ongoing, :finished, :canceled]
+  before_action :set_booking, only: [:show, :ongoing, :finished, :canceled]
   
   def new
     @booking = @room.bookings.build
@@ -52,23 +52,24 @@ class BookingsController < ApplicationController
   def ongoing
     @booking.ongoing!
 
-    # redirecionar para detalhes da reserva
-    redirect_to my_bookings_path, notice 'Status da reserva alterado para Em Andamento.'
+    redirect_to my_bookings_path, notice: 'Status da reserva alterado para Em Andamento.'
   end
 
   def finished
     @booking.finished!
 
-    # redirecionar para detalhes da reserva
-    redirect_to my_bookings_path, notice 'Status da reserva alterado para Em Andamento.'
+    redirect_to my_bookings_path, notice: 'Status da reserva alterado para Finalizado.'
   end
 
   def canceled
-    # adicionar lógica para impedir guest de cancelar com antecedência menor que 7 dias
-    @booking.canceled
+    if guest_signed_in? && @booking.start_date - Date.current < 7
+      flash[:alert] = 'O prazo para cancelar a reserva expirou.'
+    else
+      @booking.canceled!
+      flash[:notice] =  'Status da reserva alterado para Cancelado.'
+    end
 
-    # redirecionar para detalhes da reserva
-    redirect_to my_bookings_path, notice 'Status da reserva alterado para Em Andamento.'
+    redirect_to my_bookings_path
   end
 
   private
@@ -81,7 +82,7 @@ class BookingsController < ApplicationController
     @room = Room.find(params[:room_id])
   end
   
-  def set booking
+  def set_booking
     @booking = Booking.find(params[:id])
   end
 end

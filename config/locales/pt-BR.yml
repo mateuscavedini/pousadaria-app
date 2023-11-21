@@ -8,3 +8,9 @@ pt-BR:
   found_masc:
     one: encontrado
     other: encontrados
+  active: Ativo
+  inactive: Inativo
+  pending: Pendente
+  ongoing: Em Andamento
+  finished: Finalizado
+  canceled: Cancelado

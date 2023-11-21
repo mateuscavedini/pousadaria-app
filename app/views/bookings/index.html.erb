@@ -11,18 +11,20 @@
         <th><%= Room.model_name.human %></th>
         <th><%= Booking.human_attribute_name :start_date %></th>
         <th><%= Booking.human_attribute_name :finish_date %></th>
+        <th><%= Booking.human_attribute_name :status %></th>
       </tr>
     </thead>
     <tbody>
       <% @bookings.each do |booking| %>
         <tr>
-          <td><%= booking.code %></td>
+          <td><%= link_to booking.code, booking_path(booking) %></td>
           <% if guest_signed_in? %>
             <td><%= booking.room.guesthouse.trading_name %></td>
           <% end %>
           <td><%= booking.room.name %></td>
           <td><%= I18n.localize(booking.start_date) %></td>
           <td><%= I18n.localize(booking.finish_date) %></td>
+          <td><%= t(booking.status) %></td>
         </tr>
       <% end %>
     </tbody>

@@ -1,0 +1,37 @@
+<h1>Detalhes da Reserva</h1>
+
+<dl>
+  <dt><%= Booking.human_attribute_name :code %>:</dt>
+  <dd><%= @booking.code %></dd>
+  <% if owner_signed_in? %>
+    <dt><%= Guest.model_name.human %>:</dt>
+    <dd><%= guest_full_name(@booking.guest) %></dd>
+  <% elsif guest_signed_in? %>
+    <dt><%= Guesthouse.model_name.human %>:</dt>
+    <dd><%= link_to @booking.room.guesthouse.trading_name, guesthouse_path(@booking.room.guesthouse) %></dd>
+  <% end %>
+  <dt><%= Room.model_name.human %>:</dt>
+  <dd><%= link_to @booking.room.name, room_path(@booking.room) %></dd>
+  <dt><%= Booking.human_attribute_name :start_date %>:</dt>
+  <dd><%= I18n.localize(@booking.start_date) %></dd>
+  <dt><%= Booking.human_attribute_name :finish_date %>:</dt>
+  <dd><%= I18n.localize(@booking.finish_date) %></dd>
+  <dt><%= Booking.human_attribute_name :total_price %>:</dt>
+  <dd><%= number_to_currency(@booking.total_price) %></dd>
+  <dt><%= Booking.human_attribute_name :status %>:</dt>
+  <dd><%= t(@booking.status) %></dd>
+</dl>
+
+<% if guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2 %>
+  <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
+<% end %>
+
+<% if owner_signed_in? %>
+  <% if Date.current >= @booking.start_date %>
+    <%= button_to 'Realizar Check-In', ongoing_booking_path(@booking) %>
+  <% end %>
+
+  <% if @booking.ongoing? %>
+    <%= button_to 'Realizar Check-Out', finished_booking_path(@booking) %>
+  <% end %>
+<% end %>
