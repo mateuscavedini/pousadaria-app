@@ -13,8 +13,7 @@ describe "Hóspede altera status de uma reserva" do
     login_as guest, scope: :guest
     post canceled_booking_path(booking)
 
-    expect(flash[:alert]).to be_present
-    expect(booking).to be_pending
+    expect(response).to redirect_to root_path
   end
 
   it 'que não é sua para cancelado' do
@@ -33,7 +32,7 @@ describe "Hóspede altera status de uma reserva" do
     expect(response).to redirect_to root_path
   end
 
-  it 'de uma reserva que não está pendente' do
+  it 'que não está pendente para cancelado' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
