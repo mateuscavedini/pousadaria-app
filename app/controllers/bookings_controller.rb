@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :ongoing, :finished, :canceled]
 
   before_action :check_owner, only: [:ongoing]
-  before_action :check_guest, only: [:canceled]
+  before_action :check_app_user, only: [:canceled]
   before_action :check_status_pending, only: [:ongoing, :canceled]
   before_action :check_start_date, only: [:ongoing, :canceled]
   
@@ -104,8 +104,8 @@ class BookingsController < ApplicationController
     redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_owner == @booking.room.guesthouse.owner
   end
 
-  def check_guest
-    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_guest == @booking.guest
+  def check_app_user
+    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_guest == @booking.guest || current_owner == @booking.room.guesthouse.owner
   end
 
   def check_status_pending
@@ -115,7 +115,7 @@ class BookingsController < ApplicationController
   def check_start_date
     if guest_signed_in?
       redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Date.current >= 7
-    else
+    elsif owner_signed_in?
       redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Date.current >= @booking.start_date
     end
   end
