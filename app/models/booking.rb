@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   before_validation :generate_code, on: :create
 
   validates :start_date, :finish_date, :guests_number, :code, presence: true
-  validates_with DatesAreFutureValidator, FinishDateIsLaterThanStartDateValidator, DatesAreAvailableValidator
+  validates_with DatesAreFutureValidator, FinishDateIsLaterThanStartDateValidator, DatesAreAvailableValidator, on: :create
   validate :guests_number_respects_room_capacity
 
   private

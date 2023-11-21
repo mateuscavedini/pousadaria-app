@@ -29,7 +29,7 @@
 <% end %>
 
 <% if owner_signed_in? %>
-  <% if Date.current >= @booking.start_date %>
+  <% if @booking.pending? && Date.current >= @booking.start_date %>
     <%= button_to 'Realizar Check-In', ongoing_booking_path(@booking) %>
   <% end %>
 

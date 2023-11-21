@@ -8,8 +8,11 @@ class BookingsController < ApplicationController
   before_action :set_room, only: [:new, :validate]
   before_action :set_booking, only: [:show, :ongoing, :finished, :canceled]
 
+  before_action :check_owner, only: [:ongoing]
   before_action :check_guest, only: [:canceled]
-  before_action :check_status_pending, only: [:canceled]
+  before_action :check_status_pending, only: [:ongoing, :canceled]
+  before_action :check_start_date_ongoing, only: [:ongoing]
+  before_action :check_start_date_canceled, only: [:canceled]
   
   def new
     @booking = @room.bookings.build
@@ -55,7 +58,7 @@ class BookingsController < ApplicationController
   def ongoing
     @booking.ongoing!
 
-    redirect_to booking_path(@booking), notice: 'Status da reserva alterado para Em Andamento.'
+    redirect_to booking_path(@booking), notice: 'Check-In realizado com sucesso.'
   end
 
   def finished
@@ -65,14 +68,9 @@ class BookingsController < ApplicationController
   end
 
   def canceled
-    if guest_signed_in? && @booking.start_date - Date.current < 7
-      flash[:alert] = 'O prazo para cancelar a reserva expirou.'
-    else
-      @booking.canceled!
-      flash[:notice] =  'Reserva cancelada com sucesso.'
-    end
+    @booking.canceled!
 
-    redirect_to booking_path(@booking)
+    redirect_to booking_path(@booking), notice: 'Reserva cancelada com sucesso.'
   end
 
   private
@@ -89,11 +87,25 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
   end
 
+  def check_owner
+    redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_owner == @booking.room.guesthouse.owner
+  end
+
   def check_guest
     redirect_to root_path, alert: 'Você não tem acesso a esse recurso.' unless current_guest == @booking.guest
   end
 
   def check_status_pending
     redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.pending?
+  end
+
+  def check_start_date_canceled
+    if guest_signed_in?
+      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Date.current >= 7
+    end
+  end
+
+  def check_start_date_ongoing
+    redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Date.current >= @booking.start_date
   end
 end
