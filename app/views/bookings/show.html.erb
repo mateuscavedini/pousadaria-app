@@ -16,6 +16,8 @@
   <dd><%= I18n.localize(@booking.start_date) %></dd>
   <dt><%= Booking.human_attribute_name :finish_date %>:</dt>
   <dd><%= I18n.localize(@booking.finish_date) %></dd>
+  <dt><%= Booking.human_attribute_name :guests_number %>:</dt>
+  <dd><%= @booking.guests_number %></dd>
   <dt><%= Booking.human_attribute_name :total_price %>:</dt>
   <dd><%= number_to_currency(@booking.total_price) %></dd>
   <dt><%= Booking.human_attribute_name :status %>:</dt>

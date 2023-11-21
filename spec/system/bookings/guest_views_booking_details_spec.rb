@@ -37,6 +37,7 @@ describe 'Hośpede vê detalhes de uma reserva' do
     expect(page).to have_link 'Primeiro Quarto'
     expect(page).to have_content "Data Inicial: #{I18n.localize(1.day.from_now.to_date)}"
     expect(page).to have_content "Data Final: #{I18n.localize(5.days.from_now.to_date)}"
+    expect(page).to have_content 'Quantidade de Hóspedes: 2'
     expect(page).to have_content 'Total a Pagar: R$ 500,00'
     expect(page).to have_content 'Status: Pendente'
     expect(page).not_to have_content 'Hóspede: Maria dos Santos'

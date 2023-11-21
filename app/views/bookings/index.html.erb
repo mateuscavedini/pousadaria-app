@@ -11,6 +11,7 @@
         <th><%= Room.model_name.human %></th>
         <th><%= Booking.human_attribute_name :start_date %></th>
         <th><%= Booking.human_attribute_name :finish_date %></th>
+        <th><%= Booking.human_attribute_name :guests_number %></th>
         <th><%= Booking.human_attribute_name :status %></th>
       </tr>
     </thead>
@@ -24,6 +25,7 @@
           <td><%= booking.room.name %></td>
           <td><%= I18n.localize(booking.start_date) %></td>
           <td><%= I18n.localize(booking.finish_date) %></td>
+          <td><%= booking.guests_number %></td>
           <td><%= t(booking.status) %></td>
         </tr>
       <% end %>
