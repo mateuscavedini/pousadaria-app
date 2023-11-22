@@ -2,15 +2,16 @@ class BookingsController < ApplicationController
   devise_group :app_user, contains: [:guest, :owner]
 
   before_action :authenticate_guest!, only: [:create]
-  before_action :authenticate_owner!, only: [:ongoing, :finished, :my_ongoing_bookings]
+  before_action :authenticate_owner!, only: [:ongoing, :confirmed_check_out, :finished, :my_ongoing_bookings]
   before_action :authenticate_app_user!, only: [:show, :my_bookings, :canceled]
 
   before_action :set_room, only: [:new, :validate]
-  before_action :set_booking, only: [:show, :ongoing, :finished, :canceled]
+  before_action :set_booking, only: [:show, :ongoing, :confirmed_check_out, :finished, :canceled]
 
-  before_action :check_owner, only: [:ongoing]
+  before_action :check_owner, only: [:ongoing, :confirmed_check_out, :finished]
   before_action :check_app_user, only: [:canceled]
   before_action :check_status_pending, only: [:ongoing, :canceled]
+  before_action :check_status_ongoing, only: [:confirmed_check_out, :finished]
   before_action :check_start_date, only: [:ongoing, :canceled]
   
   def new
@@ -74,16 +75,22 @@ class BookingsController < ApplicationController
     redirect_to booking_path(@booking), notice: 'Check-In realizado com sucesso.'
   end
 
-  def finished
-    @booking.finished!
-
-    redirect_to booking_path(@booking), notice: 'Status da reserva alterado para Finalizado.'
-  end
-
   def canceled
     @booking.canceled!
 
     redirect_to booking_path(@booking), notice: 'Reserva cancelada com sucesso.'
+  end
+
+  def confirmed_check_out
+    @booking.total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.current)
+    render :confirm_check_out
+  end
+
+  def finished
+    @booking.finished!
+    @booking.check_out = Time.current
+
+    redirect_to booking_path(@booking), notice: 'Check-Out realizado com sucesso.'
   end
 
   private
@@ -110,6 +117,10 @@ class BookingsController < ApplicationController
 
   def check_status_pending
     redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.pending?
+  end
+
+  def check_status_ongoing
+    redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.ongoing?
   end
   
   def check_start_date

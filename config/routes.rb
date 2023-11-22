@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     post 'ongoing', on: :member
     post 'finished', on: :member
     post 'canceled', on: :member
+    get 'confirmed-check-out', on: :member
   end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'

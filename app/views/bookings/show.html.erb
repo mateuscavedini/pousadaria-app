@@ -34,6 +34,6 @@
   <% end %>
 
   <% if @booking.ongoing? %>
-    <%= button_to 'Realizar Check-Out', finished_booking_path(@booking) %>
+    <%= link_to 'Realizar Check-Out', confirmed_check_out_booking_path(@booking) %>
   <% end %>
 <% end %>
