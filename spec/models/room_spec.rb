@@ -96,4 +96,34 @@ RSpec.describe Room, type: :model do
       expect(result).to eq 5 * 85.50
     end
   end
+
+  describe '#calculate_proportional_total_price' do
+    it 'com 1 minuto de atraso' do
+      owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
+      address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
+      contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
+      guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '10:30', check_out: '11:00', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
+      room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
+      check_in = 4.days.ago
+      check_out = Time.current.at_beginning_of_day + 11.hours + 1.minute
+
+      result = room.calculate_proportional_total_price(check_in, check_out)
+
+      expect(result).to eq 600
+    end
+
+    it 'com 1 minuto de antecedência' do
+      owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
+      address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
+      contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
+      guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '10:30', check_out: '11:00', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
+      room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
+      check_in = 4.days.ago
+      check_out = Time.current.at_beginning_of_day + 10.hours + 59.minutes
+
+      result = room.calculate_proportional_total_price(check_in, check_out)
+
+      expect(result).to eq 500
+    end
+  end
 end

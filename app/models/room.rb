@@ -32,4 +32,10 @@ class Room < ApplicationRecord
 
     total_price + (regular_days.count * self.daily_rate)
   end
+
+  def calculate_proportional_total_price(check_in, check_out)
+    check_out += 1.day if check_out.strftime('%H:%M:%S') > self.guesthouse.check_out.strftime('%H:%M:%S')
+
+    calculate_total_price(check_in, check_out)
+  end
 end
