@@ -69,8 +69,7 @@ class BookingsController < ApplicationController
   end
 
   def ongoing
-    @booking.ongoing!
-    @booking.check_in = Time.current
+    @booking.update!(status: :ongoing, check_in: Time.current)
 
     redirect_to booking_path(@booking), notice: 'Check-In realizado com sucesso.'
   end
@@ -82,13 +81,13 @@ class BookingsController < ApplicationController
   end
 
   def confirmed_check_out
-    @booking.total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.current)
+    @updated_total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.current)
     render :confirm_check_out
   end
 
   def finished
-    @booking.finished!
-    @booking.check_out = Time.current
+    check_out_params = params.require(:booking).permit(:payment_method, :total_price)
+    @booking.update!(status: :finished, check_out: Time.current, payment_method: check_out_params[:payment_method], total_price: check_out_params[:total_price])
 
     redirect_to booking_path(@booking), notice: 'Check-Out realizado com sucesso.'
   end

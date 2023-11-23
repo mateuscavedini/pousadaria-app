@@ -36,7 +36,7 @@ describe 'Proprietário altera status de uma reserva' do
     expect(response).to redirect_to root_path
   end
 
-  it 'antes da data definida' do
+  it 'para em andamento antes da data definida' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
