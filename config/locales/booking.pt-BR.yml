@@ -14,5 +14,6 @@ pt-BR:
         guests_number: Quantidade de Hóspedes
         check_in: Momento de Check-In
         check_out: Momento de Check-Out
+        payment_method: Forma de Pagamento
         guest_id: Hóspede
         room_id: Quarto

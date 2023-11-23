@@ -1,1 +1,16 @@
-<h1>Confirmar Check-Out</h1>
+<h1>Resumo Check-Out</h1>
+
+<dl>
+  <dt><%= Booking.human_attribute_name :total_price %>:</dt>
+  <dd><%= number_to_currency(@booking.total_price) %></dd>
+</dl>
+
+<%= form_with model: @booking, url: finished_booking_path(@booking), method: :post do |f| %>
+  <div>
+    <%= f.label :payment_method %>
+    <%= f.text_field :payment_method %>
+  </div>
+  <div>
+    <%= f.submit 'Confirmar Check-Out' %>
+  </div>
+<% end %>

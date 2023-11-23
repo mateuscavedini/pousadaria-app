@@ -22,9 +22,13 @@
   <dd><%= number_to_currency(@booking.total_price) %></dd>
   <dt><%= Booking.human_attribute_name :status %>:</dt>
   <dd><%= t(@booking.status) %></dd>
+  <% if @booking.finished? %>
+    <dt><%= Booking.human_attribute_name :payment_method %></dt>
+    <dd><%= @booking.payment_method %></dd>
+  <% end %>
 </dl>
 
-<% if !@booking.canceled? && (guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2) %>
+<% if @booking.pending? && (guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2) %>
   <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
 <% end %>
 
