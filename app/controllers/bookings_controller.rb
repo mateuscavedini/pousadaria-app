@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :ongoing, :confirmed_check_out, :finished, :canceled]
 
   before_action :check_owner, only: [:ongoing, :confirmed_check_out, :finished]
-  before_action :check_app_user, only: [:canceled]
+  before_action :check_app_user, only: [:show, :canceled]
   before_action :check_status_pending, only: [:ongoing, :canceled]
   before_action :check_status_ongoing, only: [:confirmed_check_out, :finished]
   before_action :check_start_date, only: [:ongoing, :canceled]
