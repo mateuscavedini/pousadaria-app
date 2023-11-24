@@ -69,6 +69,8 @@ describe 'Usuário vê detalhes de uma pousada' do
 
     expect(page).not_to have_button 'Desativar Pousada'
   end
+
+  pending 'e vê as três últimas avaliações'
 end
 
 describe 'Proprietário vê detalhes de sua pousada' do

@@ -1,0 +1,15 @@
+<%= render 'errors' %>
+
+<%= form_with model: [@booking, @review] do |f| %>
+  <div>
+    <%= f.label :rating %>
+    <%= f.select :rating, [['0 (Péssimo)', 0], 1, 2, 3, 4, ['5 (Ótimo)']] %>
+  </div>
+  <div>
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

@@ -1,0 +1,6 @@
+<h1>Adicionar Avaliação - <%= Booking.model_name.human %> <%= link_to @booking.code, booking_path(@booking) %></h1>
+
+<h3><%= link_to @booking.room.guesthouse.trading_name, guesthouse_path(@booking.room.guesthouse) %> - <%= link_to @booking.room.name, room_path(@booking.room) %></h3>
+<p>Período de Estadia: <%= I18n.localize(@booking.check_in.to_date) %> até <%= I18n.localize(@booking.check_out.to_date) %></p>
+
+<%= render 'form' %>

@@ -10,6 +10,8 @@ describe 'Usuário visita página inicial' do
     end
   end
 
+  pending 'adicionar rating médio aqui??'
+
   it 'e vê pousadas cadastradas que estão ativas' do
     first_owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     second_owner = Owner.create!(name: 'José', email: 'jose@email.com', password: 'senha123')

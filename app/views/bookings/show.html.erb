@@ -41,3 +41,7 @@
     <%= link_to 'Realizar Check-Out', confirmed_check_out_booking_path(@booking) %>
   <% end %>
 <% end %>
+
+<% if @booking.finished? && guest_signed_in? %>
+  <%= link_to 'Avaliar Estadia', new_booking_review_path(@booking) %>
+<% end %>

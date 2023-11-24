@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     post 'finished', on: :member
     post 'canceled', on: :member
     get 'confirmed-check-out', on: :member
+
+    resources :reviews, only: [:new, :create]
   end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
