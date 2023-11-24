@@ -28,6 +28,16 @@
   <% end %>
 </dl>
 
+<% if @booking.review.present? %>
+  <section id="review">
+    <h2>Sua Avaliação</h2>
+
+    <h3><%= Review.human_attribute_name :rating %>: <%= @booking.review.rating %></h3>
+    <h3><%= Review.human_attribute_name :comment %></h3>
+    <p><%= @booking.review.comment %></p>
+  </section>
+<% end %>
+
 <% if @booking.pending? && (guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2) %>
   <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
 <% end %>
@@ -42,6 +52,6 @@
   <% end %>
 <% end %>
 
-<% if @booking.finished? && guest_signed_in? %>
+<% if @booking.finished? && @booking.review.nil? && guest_signed_in? %>
   <%= link_to 'Avaliar Estadia', new_booking_review_path(@booking) %>
 <% end %>
