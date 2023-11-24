@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      review:
+        one: Avaliação
+        other: Avaliações
+    attributes:
+      review:
+        rating: Nota
+        comment: Comentário
+        reply: Resposta
+        booking_id: Reserva
