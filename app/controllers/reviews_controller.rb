@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_owner!, only: [:my_reviews]
   before_action :authenticate_guest!, only: [:new, :create]
 
   before_action :set_booking, only: [:new, :create]
@@ -19,6 +20,19 @@ class ReviewsController < ApplicationController
       flash.now[:alert] = 'Não foi possível registrar a avaliação.'
       render :new
     end
+  end
+
+  def my_reviews
+    @guesthouse = current_owner.guesthouse
+    @reviews = []
+
+    @guesthouse.rooms.each do |room|
+      room.bookings.finished.each do |booking|
+        @reviews << booking.review
+      end
+    end
+
+    render :index
   end
 
   private

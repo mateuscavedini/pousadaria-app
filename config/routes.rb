@@ -39,4 +39,5 @@ Rails.application.routes.draw do
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
   get 'my-bookings', to: 'bookings#my_bookings'
   get 'my-ongoing-bookings', to: 'bookings#my_ongoing_bookings'
+  get 'my-reviews', to: 'reviews#my_reviews'
 end
