@@ -108,6 +108,7 @@ describe 'Usuário vê detalhes de uma pousada' do
 
     expect(page).to have_content 'Avaliações Recentes'
     expect(page).to have_content 'Maria dos Santos'
+    expect(page).to have_content 'Quarto: Primeiro Quarto'
     expect(page).to have_content 'Nota: 5'
     expect(page).to have_content 'Comentário: Ótima pousada!'
     expect(page).to have_content 'José Alves'

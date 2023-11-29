@@ -4,7 +4,7 @@
   <% @reviews.each do |review| %>
     <h4>Reserva <%= link_to review.booking.code, booking_path(review.booking.code) %></h4>
     <% if guest_signed_in? %>
-      <h5><%= review.booking.room.guesthouse.trading_name %> - <%= review.booking.room.name %></h5>
+      <h5><%= link_to review.booking.room.guesthouse.trading_name, guesthouse_path(review.booking.room.guesthouse) %> - <%= link_to review.booking.room.name, room_path(review.booking.room) %></h5>
     <% end %>
     <dl>
       <% if owner_signed_in? %>

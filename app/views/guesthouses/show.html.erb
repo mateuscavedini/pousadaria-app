@@ -45,6 +45,8 @@
     <% @recent_reviews.each do |review| %>
       <h5><%= guest_full_name(review.guest) %></h5>
       <dl>
+        <dt><%= Room.model_name.human %>:</dt>
+        <dd><%= review.booking.room.name %></dd>
         <dt><%= Review.human_attribute_name :rating %>:</dt>
         <dd><%= review.rating %></dd>
         <dt><%= Review.human_attribute_name :comment %>:</dt>
