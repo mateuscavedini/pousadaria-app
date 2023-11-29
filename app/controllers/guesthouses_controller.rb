@@ -8,7 +8,9 @@ class GuesthousesController < ApplicationController
   before_action :check_guesthouse_existence, only: [:new, :create]
   before_action :check_guesthouse_status, only: [:show]
 
-  def show; end
+  def show
+    @recent_reviews = @guesthouse.reviews.order(created_at: :desc).limit(3)
+  end
   
   def new
     @guesthouse = Guesthouse.new
