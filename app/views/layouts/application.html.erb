@@ -37,6 +37,7 @@
           <% elsif guest_signed_in? %>
             <li><%= guest_full_name(current_guest) %></li>
             <li><%= link_to 'Minhas Reservas', my_bookings_path %></li>
+            <li><%= link_to 'Minhas Avaliações', my_reviews_path %></li>
             <li><%= button_to 'Sair', destroy_guest_session_path, method: :delete, class: 'button' %></li>
           <% else %>
             <li id="guest-session-links">Hóspede: <%= link_to 'Registrar', new_guest_registration_path, class: 'session-button' %> | <%= link_to 'Entrar', new_guest_session_path, class: 'session-button' %></li>

@@ -1,0 +1,21 @@
+<h1>Responder Avaliação</h1>
+
+<h4>Reserva <%= link_to @review.booking.code, booking_path(@review.booking.code) %></h4>
+<dl>
+  <dt><%= Guest.model_name.human %>:</dt>
+  <dd><%= guest_full_name(@review.guest) %></dd>
+  <dt><%= Review.human_attribute_name :rating %>:</dt>
+  <dd><%= @review.rating %></dd>
+  <dt><%= Review.human_attribute_name :comment %>:</dt>
+  <dd><%= @review.comment %></dd>
+</dl>
+
+<%= form_with model: @review, url: save_reply_review_path, method: :post do |f| %>
+  <div>
+    <%= f.label :reply %>
+    <%= f.text_area :reply %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

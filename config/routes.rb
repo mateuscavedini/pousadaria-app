@@ -37,7 +37,8 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:index] do
-    post 'reply', on: :member
+    get 'new-reply', on: :member
+    post 'save-reply', on: :member
   end
   
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'

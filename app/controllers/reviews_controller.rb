@@ -1,12 +1,15 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_owner!, only: [:my_reviews, :reply]
+  devise_group :app_user, contains: [:guest, :owner]
+
+  before_action :authenticate_app_user!, only: [:my_reviews]
+  before_action :authenticate_owner!, only: [:new_reply, :save_reply]
   before_action :authenticate_guest!, only: [:new, :create]
 
   before_action :set_booking, only: [:new, :create]
-  before_action :set_review, only: [:reply]
+  before_action :set_review, only: [:new_reply, :save_reply]
 
   before_action :check_guest, only: [:new, :create]
-  before_action :check_owner, only: [:reply]
+  before_action :check_owner, only: [:new_reply, :save_reply]
   before_action :check_status_finished, only: [:new, :create]
 
   def new
@@ -25,25 +28,36 @@ class ReviewsController < ApplicationController
   end
 
   def my_reviews
-    @guesthouse = current_owner.guesthouse
     @reviews = []
 
-    @guesthouse.rooms.each do |room|
-      room.bookings.finished.each do |booking|
+    if owner_signed_in?
+      current_owner.guesthouse.rooms.each do |room|
+        room.bookings.finished.each do |booking|
+          @reviews << booking.review 
+        end
+      end
+    elsif guest_signed_in?
+      current_guest.bookings.finished.each do |booking|
         @reviews << booking.review
       end
     end
-
-    render :index
   end
 
-  def reply
+  def new_reply; end
+
+  def save_reply
+    if @review.update(review_params)
+      redirect_to my_reviews_path, notice: 'Resposta registrada com sucesso.'
+    else
+      flash.now[:alert] = 'Não foi possível registrar a resposta.'
+      render :new_reply
+    end
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params.require(:review).permit(:rating, :comment, :reply)
   end
 
   def set_booking
