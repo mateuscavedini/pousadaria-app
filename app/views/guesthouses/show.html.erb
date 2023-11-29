@@ -51,6 +51,8 @@
         <dd><%= review.comment %></dd>
       </dl>
     <% end %>
+
+    <%= link_to 'Todas Avaliações', guesthouse_reviews_path(@guesthouse) %>
   <% else %>
     <p>Esta pousada ainda não possui nenhuma avaliação.</p>
   <% end %>

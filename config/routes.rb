@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'search_by_term', on: :collection
 
     resources :rooms, only: [:new, :create]
+    resources :reviews, only: [:index]
   end
 
   resources :rooms, only: [:show, :edit, :update] do
@@ -35,8 +36,8 @@ Rails.application.routes.draw do
 
     resources :reviews, only: [:new, :create]
   end
-
-  resources :reviews, only: [:index] do
+  
+  resources :reviews, only: [] do
     get 'new-reply', on: :member
     post 'save-reply', on: :member
   end

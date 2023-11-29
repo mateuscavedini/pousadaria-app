@@ -12,6 +12,11 @@ class ReviewsController < ApplicationController
   before_action :check_owner, only: [:new_reply, :save_reply]
   before_action :check_status_finished, only: [:new, :create]
 
+  def index
+    @guesthouse = Guesthouse.find(params[:guesthouse_id])
+    @reviews = @guesthouse.reviews.order(created_at: :desc)
+  end
+
   def new
     @review = @booking.build_review
   end
