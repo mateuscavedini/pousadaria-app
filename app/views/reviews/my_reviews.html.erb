@@ -1,0 +1,30 @@
+<h1>Minhas Avaliações</h1>
+
+<% if @reviews.any? %>
+  <% @reviews.each do |review| %>
+    <h4>Reserva <%= link_to review.booking.code, booking_path(review.booking.code) %></h4>
+    <% if guest_signed_in? %>
+      <h5><%= review.booking.room.guesthouse.trading_name %> - <%= review.booking.room.name %></h5>
+    <% end %>
+    <dl>
+      <% if owner_signed_in? %>
+        <dt><%= Guest.model_name.human %>:</dt>
+        <dd><%= guest_full_name(review.guest) %></dd>
+      <% end %>
+      <dt><%= Review.human_attribute_name :rating %>:</dt>
+      <dd><%= review.rating %></dd>
+      <dt><%= Review.human_attribute_name :comment %>:</dt>
+      <dd><%= review.comment %></dd>
+      <% if review.reply.present? %>
+        <dt><%= Review.human_attribute_name :reply %>:</dt>
+        <dd><%= review.reply %></dd>
+      <% end %>
+    </dl>
+
+    <% if owner_signed_in? %>
+      <%= link_to 'Responder', new_reply_review_path(review) %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Não existem avaliações a serem exibidas.</p>
+<% end %>
