@@ -6,6 +6,6 @@ class Api::V1::RoomsController < Api::V1::ApiController
 
     rooms = guesthouse.rooms.active
 
-    render status: 200, json: rooms.as_json(only: [:name, :description, :area, :daily_rate])
+    render status: 200, json: rooms.as_json(only: [:id, :name, :description, :area, :daily_rate, :guesthouse_id])
   end
 end
