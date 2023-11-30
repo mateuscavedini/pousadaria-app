@@ -46,4 +46,10 @@ Rails.application.routes.draw do
   get 'my-bookings', to: 'bookings#my_bookings'
   get 'my-ongoing-bookings', to: 'bookings#my_ongoing_bookings'
   get 'my-reviews', to: 'reviews#my_reviews'
+
+  namespace :api do
+    namespace :v1 do
+      resources :guesthouses, only: [:index]
+    end
+  end
 end
