@@ -32,7 +32,7 @@
   <dt>Nota Média de Avaliação:</dt>
   <dd>
     <% if @guesthouse.reviews.any? %>
-      <%= number_with_precision(@guesthouse.average_rating, precision: 2) %>
+      <%= @guesthouse.average_rating %>
     <% else %>
       Nenhuma avaliação
     <% end %>

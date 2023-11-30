@@ -32,7 +32,7 @@ describe 'Usuário vê detalhes de uma pousada' do
     expect(page).to have_content 'Horário de Check-Out: 10:30'
     expect(page).to have_content 'Endereço: Rua do Teste, 100, Jd. Testando, 11010-001, Jundiaí - SP'
     expect(page).to have_content 'Contato: pousada@teste.com | 11912344321'
-    expect(page).to have_content 'Nota Média de Avaliação: 3,25'
+    expect(page).to have_content 'Nota Média de Avaliação: 3.25'
   end
 
   it 'e volta para a página inicial' do

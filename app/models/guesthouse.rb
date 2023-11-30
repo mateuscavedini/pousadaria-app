@@ -15,6 +15,6 @@ class Guesthouse < ApplicationRecord
   validates :registration_number, uniqueness: true
 
   def average_rating
-    self.reviews.average(:rating) if self.reviews.any?
+    self.reviews.average(:rating).round(2) if self.reviews.any?
   end
 end
