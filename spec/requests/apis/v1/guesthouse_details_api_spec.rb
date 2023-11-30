@@ -23,7 +23,6 @@ describe 'Exibe detalhes de uma pousada' do
 
       get "/api/v1/guesthouses/#{guesthouse.id}"
       json_response = JSON.parse(response.body)
-      puts json_response
 
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'

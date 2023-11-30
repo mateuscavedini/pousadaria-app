@@ -41,11 +41,17 @@ GET /api/v1/guesthouses/?query=
 [
   {
     "id": 1,
-    "trading_name": "Pousada do Litoral"
+    "trading_name": "Pousada do Litoral",
+    "address": {
+      "city": "Santos"
+    }
   },
   {
     "id": 3,
-    "trading_name": "Pousada do Mar"
+    "trading_name": "Pousada do Mar",
+    "address": {
+      "city": "Florianópolis"
+    }
   }
 ]
 ```
@@ -53,9 +59,7 @@ GET /api/v1/guesthouses/?query=
 ou
 
 ```json
-{
-  []
-}
+[]
 ```
 
 caso não haja pousadas a serem exibidas.
@@ -84,6 +88,7 @@ GET /api/v1/guesthouses/:id
   "check_in": "11:00",
   "check_out": "14:00",
   "payment_methods": "Dinheiro, Pix e Cartão de Crédito",
+  "average_rating": "4.64",
   "address": {
     "street_name": "Rua das Pousadas",
     "street_number": "44",
@@ -146,9 +151,7 @@ GET /api/v1/guesthouses/:guesthouse_id/rooms
 ou
 
 ```json
-{
-  []
-}
+[]
 ```
 
 caso não haja quartos a serem exibidos.
@@ -202,11 +205,11 @@ GET /api/v1/rooms/:room_id/validate-booking/?start_date=&finish_date=&guests_num
 }
 ```
 
-**404 NOT_FOUND** (Quarto inativo):
+**404 NOT_FOUND** (Pousada ou Quarto inativo):
 
 ```json
 {
-  "message": "Quarto está inativo."
+  "message": "Pousada/Quarto está inativo."
 }
 ```
 
