@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     resources :seasonal_rates, only: [:new, :create]
     resources :bookings, only: [:new, :create]
-    get 'validate_booking', to: 'bookings#validate'
+    get 'validate-booking', to: 'bookings#validate'
   end
 
   resources :seasonal_rates, only: [:edit, :update] do
@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :guesthouses, only: [:index, :show] do
         resources :rooms, only: [:index]
+      end
+
+      resources :rooms, only: [] do
+        get 'validate-booking', to: 'bookings#validate'
       end
     end
   end
