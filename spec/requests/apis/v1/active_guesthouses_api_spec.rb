@@ -66,9 +66,10 @@ describe 'Lista pousadas ativas' do
       allow(Guesthouse).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
       get '/api/v1/guesthouses'
+      json_response = JSON.parse(response.body)
 
       expect(response.status).to eq 500
-      expect(response.body).to include 'Erro interno de servidor.'
+      expect(json_response['message']).to eq 'Erro interno de servidor.'
     end
   end
 end

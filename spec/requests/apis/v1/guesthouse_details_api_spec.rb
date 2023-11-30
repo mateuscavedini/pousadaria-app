@@ -64,16 +64,18 @@ describe 'Exibe detalhes de uma pousada' do
       guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner, status: :inactive)
 
       get "/api/v1/guesthouses/#{guesthouse.id}"
+      json_response = JSON.parse(response.body)
 
       expect(response.status).to eq 404
-      expect(response.body).to include 'Pousada está inativa.'
+      expect(json_response['message']).to eq 'Pousada está inativa.'
     end
 
     it 'que não existe' do
       get '/api/v1/guesthouses/999999999'
+      json_response = JSON.parse(response.body)
 
       expect(response.status).to eq 404
-      expect(response.body).to include 'Recurso não encontrado.'
+      expect(json_response['message']).to eq 'Recurso não encontrado.'
     end
 
     it 'com erro interno' do
@@ -85,9 +87,10 @@ describe 'Exibe detalhes de uma pousada' do
       allow(Guesthouse).to receive(:find).and_raise(ActiveRecord::QueryCanceled)
 
       get "/api/v1/guesthouses/#{guesthouse.id}"
+      json_response = JSON.parse(response.body)
 
       expect(response.status).to eq 500
-      expect(response.body).to include 'Erro interno de servidor.'
+      expect(json_response['message']).to eq 'Erro interno de servidor.'
     end
   end
 end
