@@ -42,7 +42,7 @@ describe 'Lista quartos ativos de pousada' do
     end
 
     it 'que não existe' do
-      get '/api/v1/guesthouses/0000000/rooms'
+      get '/api/v1/guesthouses/9999999999/rooms'
 
       expect(response.status).to eq 404
       expect(response.body).to include 'Recurso não encontrado.'
