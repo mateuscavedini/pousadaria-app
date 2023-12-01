@@ -20,4 +20,4 @@
   <% end %>
 </dl>
 
-<%= button_to 'Confirmar Reserva', room_bookings_path, params: { booking: { start_date: @booking.start_date, finish_date: @booking.finish_date, guests_number: @booking.guests_number, total_price: @booking.total_price, room_id: @room.id } } %>
+<%= button_to 'Confirmar Reserva', room_bookings_path %>

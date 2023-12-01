@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   before_action :authenticate_owner!, only: [:ongoing, :confirmed_check_out, :finished, :my_ongoing_bookings]
   before_action :authenticate_app_user!, only: [:show, :my_bookings, :canceled]
 
-  before_action :set_room, only: [:new, :validate]
+  before_action :set_room, only: [:new, :create, :validate]
   before_action :set_booking, only: [:show, :ongoing, :confirmed_check_out, :finished, :canceled]
 
   before_action :check_owner, only: [:ongoing, :confirmed_check_out, :finished]
@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
 
     if @booking.valid?
       @booking.total_price = @room.calculate_total_price(@booking.start_date, @booking.finish_date)
+      session[:booking] = @booking
     else
       flash.now[:alert] = 'Não foi possível fazer a pré-reserva.'
       render :new
@@ -30,9 +31,15 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = current_guest.bookings.build(booking_params)
+    @booking =
+      if session[:booking].present?
+        current_guest.bookings.build(session[:booking])
+      else
+        current.guest.bookings.build(booking_params)
+      end
 
     if @booking.save
+      session.delete(:booking)
       redirect_to my_bookings_path, notice: 'Reserva confirmada com sucesso.'
     else
       flash.now[:alert] = 'Não foi possível confirmar a reserva.'
