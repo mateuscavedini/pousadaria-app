@@ -23,7 +23,7 @@
   <dt><%= Booking.human_attribute_name :status %>:</dt>
   <dd><%= t(@booking.status) %></dd>
   <% if @booking.finished? %>
-    <dt><%= Booking.human_attribute_name :payment_method %></dt>
+    <dt><%= Booking.human_attribute_name :payment_method %>:</dt>
     <dd><%= @booking.payment_method %></dd>
   <% end %>
 </dl>

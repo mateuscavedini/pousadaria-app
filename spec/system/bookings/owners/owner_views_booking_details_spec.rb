@@ -27,6 +27,7 @@ describe 'Proprietário vê detalhes de uma reserva' do
     expect(page).to have_content 'Status: Pendente'
     expect(page).not_to have_content 'Pousada:'
     expect(page).not_to have_link 'Pousada Teste'
+    expect(page).not_to have_content 'Forma de Pagamento:'
   end
 
   it 'e vê botão para realizar check-in de hóspede a partir da data informada' do
@@ -43,9 +44,9 @@ describe 'Proprietário vê detalhes de uma reserva' do
       visit root_path
       click_on 'Reservas'
       click_on booking.code
-      
-      expect(page).to have_button 'Realizar Check-In'
     end
+      
+    expect(page).to have_button 'Realizar Check-In'
   end
 
   it 'e não vê botão para realizar check-in de hóspede enquanto não chegar na data informada' do
@@ -58,9 +59,7 @@ describe 'Proprietário vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 5.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: room.calculate_total_price(5.days.from_now.to_date, 10.days.from_now.to_date), room: room, guest: guest)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).not_to have_button 'Realizar Check-In'
   end
@@ -76,12 +75,10 @@ describe 'Proprietário vê detalhes de uma reserva' do
 
     travel_to 3.days.from_now do
       login_as owner, scope: :owner
-      visit root_path
-      click_on 'Reservas'
-      click_on booking.code
-  
-      expect(page).to have_button 'Cancelar Reserva'
+      visit booking_path(booking)
     end
+
+    expect(page).to have_button 'Cancelar Reserva'
   end
 
   it 'e não vê botão para cancelar reserva enquanto não tenham se passados ao menos dois dias do check-in' do
@@ -94,9 +91,7 @@ describe 'Proprietário vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).not_to have_button 'Cancelar Reserva'
   end
@@ -111,9 +106,7 @@ describe 'Proprietário vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest, status: :ongoing)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).to have_link 'Realizar Check-Out'
   end
@@ -128,9 +121,7 @@ describe 'Proprietário vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest, status: :pending)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).not_to have_link 'Realizar Check-Out'
   end

@@ -58,12 +58,10 @@ describe 'Proprietário cadastra quarto' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
-    Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
+    guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Pousada Teste'
-    click_on 'Adicionar Quarto'
+    visit new_guesthouse_room_path(guesthouse)
     fill_in 'Nome', with: 'Primeiro Quarto'
     fill_in 'Descrição', with: 'Primeiro quarto a ser cadastrado'
     fill_in 'Área', with: '45'
@@ -97,12 +95,10 @@ describe 'Proprietário cadastra quarto' do
     owner = Owner.create!(name: 'Maria', email: 'maria@email.com', password: 'senha123')
     address_attributes = { street_name: 'Rua do Teste', street_number: '100', district: 'Jd. Testando', city: 'Jundiaí', state: 'SP', postal_code: '11010-001' }
     contact_attributes = { phone: '11912344321', email: 'pousada@teste.com' }
-    Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
+    guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '11:00', check_out: '10:30', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
 
     login_as owner, scope: :owner
-    visit root_path
-    click_on 'Pousada Teste'
-    click_on 'Adicionar Quarto'
+    visit new_guesthouse_room_path(guesthouse)
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     fill_in 'Área', with: ''

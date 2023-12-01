@@ -41,10 +41,7 @@ describe 'Usuário cria conta como proprietário de pousada' do
   end
 
   it 'com dados insuficientes' do
-    visit root_path
-    within '#owner-session-links' do
-      click_on 'Registrar'
-    end
+    visit new_owner_registration_path
     fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Senha', with: ''

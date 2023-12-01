@@ -41,6 +41,7 @@ describe 'Hośpede vê detalhes de uma reserva' do
     expect(page).to have_content 'Total a Pagar: R$ 500,00'
     expect(page).to have_content 'Status: Pendente'
     expect(page).not_to have_content 'Hóspede: Maria dos Santos'
+    expect(page).not_to have_content 'Forma de Pagamento:'
   end
 
   it 'que não é sua' do
@@ -70,9 +71,7 @@ describe 'Hośpede vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 7.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest)
 
     login_as guest, scope: :guest
-    visit root_path
-    click_on 'Minhas Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).to have_button 'Cancelar Reserva'
   end
@@ -87,9 +86,7 @@ describe 'Hośpede vê detalhes de uma reserva' do
     booking = Booking.create!(start_date: 6.days.from_now, finish_date: 10.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), room: room, guest: guest)
 
     login_as guest, scope: :guest
-    visit root_path
-    click_on 'Minhas Reservas'
-    click_on booking.code
+    visit booking_path(booking)
 
     expect(page).not_to have_button 'Cancelar Reserva'
   end

@@ -72,10 +72,7 @@ describe 'Hóspede avalia estadia/reserva' do
     booking = Booking.create!(start_date: 1.day.from_now, finish_date: 5.days.from_now, guests_number: 2, total_price: room.calculate_total_price(1.day.from_now.to_date, 5.days.from_now.to_date), check_in: 1.day.from_now, check_out: 5.days.from_now, room: room, guest: guest, status: :finished)
 
     login_as guest, scope: :guest
-    visit root_path
-    click_on 'Minhas Reservas'
-    click_on booking.code
-    click_on 'Avaliar Estadia'
+    visit new_booking_review_path(booking)
     fill_in 'Comentário', with: ''
     click_on 'Enviar'
 

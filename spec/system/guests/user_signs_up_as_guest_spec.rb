@@ -42,10 +42,7 @@ describe 'Usuário cria conta como hóspede' do
   end
 
   it 'com dados insuficientes' do
-    visit root_path
-    within '#guest-session-links' do
-      click_on 'Registrar'
-    end
+    visit new_guest_registration_path
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
     fill_in 'CPF', with: ''
@@ -64,10 +61,7 @@ describe 'Usuário cria conta como hóspede' do
   it 'com cpf já cadastrado' do
     Guest.create!(first_name: 'Maria', last_name: 'da Silva', social_number: '11122233345', email: 'maria@email.com', password: 'senha123')
 
-    visit root_path
-    within '#guest-session-links' do
-      click_on 'Registrar'
-    end
+    visit new_guest_registration_path
     fill_in 'CPF', with: '11122233345'
     click_on 'Criar Conta'
 
