@@ -13,9 +13,6 @@
 
 body {
   padding: 2rem 2rem 0.5rem 2rem;
-  section h3 {
-    margin-bottom: 1rem;
-  }
 }
 
 header {
@@ -70,6 +67,22 @@ input[type="submit"] {
   padding: 0.25rem 0.75rem;
 }
 
+table,
+th,
+td {
+  border: 1px solid white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
 .button {
   background-color: transparent;
   font-size: 1rem;
@@ -77,6 +90,12 @@ input[type="submit"] {
   padding: 0.25rem 0.75rem;
   border: 1px solid white;
   transition: 0.15s ease-in;
+}
+
+.input-button {
+  background-color: white;
+  color: black;
+  padding: 0.25rem 0.75rem;
 }
 
 .session-button {

@@ -11,15 +11,15 @@
   </div>
   <div>
     <%= f.label :area %>
-    <%= f.number_field :area %>
+    <%= f.number_field :area, min: 1, step: 1 %>
   </div>
   <div>
     <%= f.label :max_capacity %>
-    <%= f.number_field :max_capacity %>
+    <%= f.number_field :max_capacity, min: 1, step: 1 %>
   </div>
   <div>
     <%= f.label :daily_rate %>
-    <%= f.number_field :daily_rate, step: 0.01 %>
+    <%= f.number_field :daily_rate, min: 0.01, step: 0.01 %>
   </div>
   <div>
     <%= f.label :has_bathroom %>

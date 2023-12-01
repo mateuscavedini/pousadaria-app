@@ -39,19 +39,19 @@
 <% end %>
 
 <% if @booking.pending? && (guest_signed_in? && @booking.start_date - Time.zone.now.to_date >= 7 || owner_signed_in? && Time.zone.now.to_date - @booking.start_date >= 2) %>
-  <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
+  <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking), class: 'button' %>
 <% end %>
 
 <% if owner_signed_in? %>
   <% if @booking.pending? && Time.zone.now.to_date >= @booking.start_date %>
-    <%= button_to 'Realizar Check-In', ongoing_booking_path(@booking) %>
+    <%= button_to 'Realizar Check-In', ongoing_booking_path(@booking), class: 'button' %>
   <% end %>
 
   <% if @booking.ongoing? %>
-    <%= link_to 'Realizar Check-Out', confirmed_check_out_booking_path(@booking) %>
+    <%= link_to 'Realizar Check-Out', confirmed_check_out_booking_path(@booking), class: 'button' %>
   <% end %>
 <% end %>
 
 <% if @booking.finished? && @booking.review.nil? && guest_signed_in? %>
-  <%= link_to 'Avaliar Estadia', new_booking_review_path(@booking) %>
+  <%= link_to 'Avaliar Estadia', new_booking_review_path(@booking), class: 'button' %>
 <% end %>
