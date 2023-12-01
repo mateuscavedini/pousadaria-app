@@ -6,7 +6,6 @@
 </dl>
 
 <%= form_with model: @booking, url: finished_booking_path(@booking), method: :post do |f| %>
-  <%= f.hidden_field :total_price, value: @updated_total_price %>
   <div>
     <%= f.label :payment_method %>
     <%= f.text_field :payment_method %>

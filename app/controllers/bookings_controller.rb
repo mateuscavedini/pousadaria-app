@@ -89,12 +89,24 @@ class BookingsController < ApplicationController
 
   def confirmed_check_out
     @updated_total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.zone.now)
+    session[:updated_total_price] = @updated_total_price
+    
     render :confirm_check_out
   end
 
   def finished
     check_out_params = params.require(:booking).permit(:payment_method, :total_price)
-    @booking.update!(status: :finished, check_out: Time.zone.now, payment_method: check_out_params[:payment_method], total_price: check_out_params[:total_price])
+    payment_method = check_out_params[:payment_method]
+    total_price =
+      if session[:updated_total_price].present?
+        session[:updated_total_price]
+      else
+        check_out_params[:total_price]
+      end
+
+    @booking.update!(status: :finished, check_out: Time.zone.now, payment_method: payment_method, total_price: total_price)
+
+    session.delete(:updated_total_price)
 
     redirect_to booking_path(@booking), notice: 'Check-Out realizado com sucesso.'
   end
