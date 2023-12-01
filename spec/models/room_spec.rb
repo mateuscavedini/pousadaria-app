@@ -105,7 +105,7 @@ RSpec.describe Room, type: :model do
       guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '10:30', check_out: '11:00', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
       room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
       check_in = 4.days.ago
-      check_out = Time.current.at_beginning_of_day + 11.hours + 1.minute
+      check_out = Time.zone.now.at_beginning_of_day + 11.hours + 1.minute
 
       result = room.calculate_proportional_total_price(check_in, check_out)
 
@@ -119,7 +119,7 @@ RSpec.describe Room, type: :model do
       guesthouse = Guesthouse.create!(corporate_name: 'Pousadas Brasil LTDA', trading_name: 'Pousada Teste', registration_number: '12345678000100', description: 'Ambientes com Wi-Fi, suítes privadas, quartos compartilhados, segurança 24h.', allow_pets: false, usage_policy: 'Proibido fumar nos ambientes da pousada; Proibido barulho após as 22h.', check_in: '10:30', check_out: '11:00', payment_methods: 'Dinheiro e Cartão de Crédito', address_attributes: address_attributes, contact_attributes: contact_attributes, owner: owner)
       room = Room.create!(name: 'Primeiro Quarto', description: 'Primeiro quarto a ser cadastrado', area: 50, max_capacity: 2, daily_rate: 100, has_bathroom: true, has_balcony: false, has_air_conditioner: true, has_tv: true, has_wardrobe: true, has_safe: true, is_accessible: true, guesthouse: guesthouse)
       check_in = 4.days.ago
-      check_out = Time.current.at_beginning_of_day + 10.hours + 59.minutes
+      check_out = Time.zone.now.at_beginning_of_day + 10.hours + 59.minutes
 
       result = room.calculate_proportional_total_price(check_in, check_out)
 

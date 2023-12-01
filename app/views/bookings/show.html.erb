@@ -38,12 +38,12 @@
   </section>
 <% end %>
 
-<% if @booking.pending? && (guest_signed_in? && @booking.start_date - Date.current >= 7 || owner_signed_in? && Date.current - @booking.start_date >= 2) %>
+<% if @booking.pending? && (guest_signed_in? && @booking.start_date - Time.zone.now.to_date >= 7 || owner_signed_in? && Time.zone.now.to_date - @booking.start_date >= 2) %>
   <%= button_to 'Cancelar Reserva', canceled_booking_path(@booking) %>
 <% end %>
 
 <% if owner_signed_in? %>
-  <% if @booking.pending? && Date.current >= @booking.start_date %>
+  <% if @booking.pending? && Time.zone.now.to_date >= @booking.start_date %>
     <%= button_to 'Realizar Check-In', ongoing_booking_path(@booking) %>
   <% end %>
 

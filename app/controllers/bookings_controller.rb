@@ -69,7 +69,7 @@ class BookingsController < ApplicationController
   end
 
   def ongoing
-    @booking.update!(status: :ongoing, check_in: Time.current)
+    @booking.update!(status: :ongoing, check_in: Time.zone.now)
 
     redirect_to booking_path(@booking), notice: 'Check-In realizado com sucesso.'
   end
@@ -81,13 +81,13 @@ class BookingsController < ApplicationController
   end
 
   def confirmed_check_out
-    @updated_total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.current)
+    @updated_total_price = @booking.room.calculate_proportional_total_price(@booking.check_in, Time.zone.now)
     render :confirm_check_out
   end
 
   def finished
     check_out_params = params.require(:booking).permit(:payment_method, :total_price)
-    @booking.update!(status: :finished, check_out: Time.current, payment_method: check_out_params[:payment_method], total_price: check_out_params[:total_price])
+    @booking.update!(status: :finished, check_out: Time.zone.now, payment_method: check_out_params[:payment_method], total_price: check_out_params[:total_price])
 
     redirect_to booking_path(@booking), notice: 'Check-Out realizado com sucesso.'
   end
@@ -124,9 +124,9 @@ class BookingsController < ApplicationController
   
   def check_start_date
     if guest_signed_in?
-      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Date.current >= 7
+      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Time.zone.now.to_date >= 7
     elsif owner_signed_in?
-      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Date.current >= @booking.start_date
+      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Time.zone.now.to_date >= @booking.start_date
     end
   end
 end
