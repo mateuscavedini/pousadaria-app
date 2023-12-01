@@ -123,10 +123,9 @@ class BookingsController < ApplicationController
   end
   
   def check_start_date
-    if guest_signed_in?
-      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless @booking.start_date - Time.zone.now.to_date >= 7
-    elsif owner_signed_in?
-      redirect_to root_path, alert: 'Recurso indisponível para esta reserva.' unless Time.zone.now.to_date >= @booking.start_date
-    end
+    return if guest_signed_in? && @booking.start_date - Time.zone.now.to_date >= 7
+    return if owner_signed_in? && Time.zone.now.to_date >= @booking.start_date
+
+    redirect_to root_path, alert: 'Recurso indisponível para esta reserva.'
   end
 end

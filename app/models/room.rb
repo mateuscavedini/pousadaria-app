@@ -14,7 +14,7 @@ class Room < ApplicationRecord
 
     return stay_range.count * self.daily_rate unless seasonal_rates.present?
 
-    total_price = 0
+    seasonal_total_price = 0
     regular_days = stay_range.to_a
 
     stay_range.each do |day|
@@ -22,15 +22,15 @@ class Room < ApplicationRecord
         seasonal_rate_range = Range.new(seasonal_rate.start_date.to_date, seasonal_rate.finish_date.to_date)
 
         if seasonal_rate_range.include? day
-          total_price += seasonal_rate.rate
+          seasonal_total_price += seasonal_rate.rate
           regular_days.delete(day)
         end
       end
     end
 
-    return total_price unless regular_days.present?
+    return seasonal_total_price unless regular_days.present?
 
-    total_price + (regular_days.count * self.daily_rate)
+    seasonal_total_price + (regular_days.count * self.daily_rate)
   end
 
   def calculate_proportional_total_price(check_in, check_out)
